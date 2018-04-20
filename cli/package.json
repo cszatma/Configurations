@@ -1,0 +1,59 @@
+{
+  "name": "@cszatma/config-gen",
+  "version": "1.0.0",
+  "description": "CLI to generate js/json configuration files for various packages",
+  "keywords": [
+    "config gen",
+    "config create"
+  ],
+  "author": {
+    "name": "Christopher Szatmary",
+    "email": "cs@christopherszatmary.com",
+    "url": "https://christopherszatmary.com"
+  },
+  "repository": "cszatma/Configurations",
+  "bugs": {
+    "url": "https://github.com/cszatma/Configurations/issues"
+  },
+  "license": "MIT",
+  "main": "build/index.js",
+  "bin": {
+    "config-gen": "build/index.js"
+  },
+  "dependencies": {
+    "chalk": "^2.4.0",
+    "commander": "^2.15.1",
+    "cross-spawn": "^6.0.5",
+    "fs-extra": "^5.0.0",
+    "lodash": "^4.17.5"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^5.0.2",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.4",
+    "prettier": "^1.12.1",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.12.0",
+    "tslint-plugin-prettier": "^1.3.0",
+    "typescript": "^2.8.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "config-gen": "node build/index.js",
+    "lint": "tslint -p ./tsconfig.json --fix",
+    "precommit": "lint-staged",
+    "watch": "tsc -w"
+  },
+  "prettier": {
+    "parser": "typescript",
+    "trailingComma": "all",
+    "singleQuote": true,
+    "tabWidth": 4
+  },
+  "lint-staged": {
+    "*.ts": [
+      "tslint -p ./tsconfig.json --fix",
+      "git add"
+    ]
+  }
+}
