@@ -20,12 +20,16 @@
   "bin": {
     "config-gen": "build/index.js"
   },
+  "engines": {
+    "node": ">=6"
+  },
   "dependencies": {
     "chalk": "^2.4.0",
     "commander": "^2.15.1",
     "cross-spawn": "^6.0.5",
     "fs-extra": "^5.0.0",
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.5",
+    "semver": "^5.5.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.2",
@@ -57,7 +61,7 @@
   },
   "lint-staged": {
     "*.ts": [
-      "tslint -p ./tsconfig.json --fix",
+      "tslint -p ./tsconfig.json -e \"**/tests/**\" --fix",
       "git add"
     ]
   }
