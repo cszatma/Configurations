@@ -1,15 +1,16 @@
-import commander from 'commander';
+import { Command } from 'commander';
 
 import addCommand from './commands/add';
+import listCommand from './commands/list';
+import logError from './utils/log-error';
 import './utils/type-extensions';
-import { stripScope } from './utils/util-functions';
 
 const packageJson = require('../package.json');
 
-const programName = stripScope(packageJson.name);
+const programName = packageJson.name;
 
-const program = new commander.Command(programName)
-    .version(packageJson.version)
+const program = new Command(programName)
+    .version(packageJson.version, '-v, --version')
     .on('--help', () => {
         console.log(
             `\nRun \`${programName} COMMAND --help\` for more information about a given command.`,
@@ -44,9 +45,30 @@ program
     )
     .action(addCommand);
 
+program
+    .command('list [config]')
+    .alias('ls')
+    .description(
+        'List all available configs or list available file types for a given config',
+    )
+    .usage('[options]')
+    .action(listCommand);
+
+program.command('help').action(() => program.help());
+
 program.parse(process.argv);
 
 if (program.args.length < 1) {
     program.help();
     process.exit(0);
+}
+
+const availableCommands = program.commands.map((command: Command) =>
+    command.name(),
+);
+
+if (!availableCommands.includes(program.args[0])) {
+    logError(`Error: ${program.args[0]} is not a valid command!`);
+    console.log('Use `config-gen --help` to see a list of available commands.');
+    process.exit(1);
 }
