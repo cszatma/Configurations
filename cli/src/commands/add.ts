@@ -96,6 +96,7 @@ export default function add(configName: string, options?: AddOptions) {
                 `Successfully wrote ${config.name} config to package.json.`,
             ),
         );
+        process.exit(0);
     }
 
     const configFileName = config.fileNames[configType];
