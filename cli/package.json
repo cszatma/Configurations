@@ -29,9 +29,12 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.2",
+    "@types/jest": "^22.2.3",
     "husky": "^0.14.3",
+    "jest": "^22.4.3",
     "lint-staged": "^7.0.4",
     "prettier": "^1.12.1",
+    "ts-jest": "^22.4.4",
     "tslint": "^5.9.1",
     "tslint-config-prettier": "^1.12.0",
     "tslint-plugin-prettier": "^1.3.0",
@@ -42,6 +45,8 @@
     "config-gen": "node build/index.js",
     "lint": "tslint -p ./tsconfig.json --fix",
     "precommit": "lint-staged",
+    "test": "jest",
+    "test-watch": "jest --watch",
     "watch": "tsc -w"
   },
   "prettier": {
