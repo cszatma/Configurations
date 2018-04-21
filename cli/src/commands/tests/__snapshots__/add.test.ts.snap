@@ -26,12 +26,14 @@ exports[`Tests for the add command should print the help for config-gen 1`] = `
 
   Options:
 
-    -V, --version                output the version number
+    -v, --version                output the version number
     -h, --help                   output usage information
 
   Commands:
 
     add [options] <config-name>  Adds the given configuration file to your project
+    list|ls [config]             List all available configs or list available file types for a given config
+    help
 
 Run \`config-gen COMMAND --help\` for more information about a given command.
 "
