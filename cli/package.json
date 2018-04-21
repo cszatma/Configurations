@@ -15,9 +15,9 @@
     "email": "cs@christopherszatmary.com",
     "url": "https://christopherszatmary.com"
   },
-  "repository": "cszatma/Configurations",
+  "repository": "cszatma/config-gen",
   "bugs": {
-    "url": "https://github.com/cszatma/Configurations/issues"
+    "url": "https://github.com/cszatma/config-gen/issues"
   },
   "license": "MIT",
   "main": "build/index.js",
