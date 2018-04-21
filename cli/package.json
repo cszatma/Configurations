@@ -4,7 +4,11 @@
   "description": "CLI to generate js/json configuration files for various packages",
   "keywords": [
     "config gen",
-    "config create"
+    "config create",
+    "create configs",
+    "configs",
+    "configurations",
+    "config creator"
   ],
   "author": {
     "name": "Christopher Szatmary",
