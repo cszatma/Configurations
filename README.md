@@ -38,6 +38,18 @@ Use `config-gen --help` or `config-gen [command] --help` to get information on a
 -h, --help                output usage information
 ```
 
+To list all available configs run:
+
+```bash
+$ config-gen list
+```
+
+To list all available file types for a config run:
+
+```bash
+$ config-gen list [command]
+```
+
 ### Examples:
 
 ```bash
