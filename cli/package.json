@@ -1,5 +1,5 @@
 {
-  "name": "@cszatma/config-gen",
+  "name": "config-gen",
   "version": "1.0.0",
   "description": "CLI to generate js/json configuration files for various packages",
   "keywords": [
