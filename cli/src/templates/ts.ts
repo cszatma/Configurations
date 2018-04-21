@@ -14,5 +14,4 @@ module.exports = {
         },
     },
     include: ['src/**/*'],
-    exclude: ['**/tests/**'],
 };
