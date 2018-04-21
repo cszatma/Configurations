@@ -36,6 +36,9 @@ export default function add(configName: string, options?: AddOptions) {
     // If config is null then configName was not a valid config
     if (!config) {
         logError(`Error: ${configName} is not a valid config!`);
+        console.log(
+            'Use `config-gen list` to list all available config types.',
+        );
         process.exit(1);
     }
 

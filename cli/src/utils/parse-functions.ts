@@ -4,9 +4,8 @@ export function parseConfigName(configName: string): ConfigType {
     const normalizedName = configName.trim().toLowerCase();
 
     // See if one of the configs matches the config name
-    // For example `.prettierrc.json` would match the prettier config
-    return Object.values(configTypes).find(config =>
-        normalizedName.includes(config.name),
+    return Object.values(configTypes).find(
+        config => normalizedName === config.name,
     );
 }
 
