@@ -13,6 +13,10 @@ export interface ConfigType {
     readonly supportsPackageJson: boolean;
 }
 
+export interface Configs {
+    readonly [config: string]: ConfigType;
+}
+
 const babel: ConfigType = {
     defaultType: 'json',
     fileNames: {
@@ -80,7 +84,7 @@ const tslint: ConfigType = {
     supportsPackageJson: false,
 };
 
-const configTypes = {
+const configTypes: Configs = {
     babel,
     eslint,
     lintStaged,
