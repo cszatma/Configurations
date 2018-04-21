@@ -32,11 +32,15 @@ program
         '-t, --type <type>',
         'File type, either js or json, defaults to json',
     )
+    .option(
+        '-i, --indent <indent>',
+        'Sets the indentation amount for the config file, defaults to 2',
+    )
     .option('-P, --package-json', 'Adds the config file to your package.json')
     .option('-w, --write', 'Overwrites a config file if it already exists')
     .option(
         '-f, --force',
-        'Equivalent to calling both --path-create and --write',
+        'Equivalent to calling both --create-directories and --write',
     )
     .action(addCommand);
 
