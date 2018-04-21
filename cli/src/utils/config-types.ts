@@ -7,6 +7,7 @@ export interface ConfigType {
         readonly js?: string;
         readonly json?: string;
         readonly packageJson?: string;
+        readonly [key: string]: string;
     };
     readonly name: string;
     readonly supportsPackageJson: boolean;
