@@ -1,8 +1,8 @@
 import commander from 'commander';
 
 import addCommand from './commands/add';
-import stripScope from './utils/strip-scope';
 import './utils/type-extensions';
+import { stripScope } from './utils/util-functions';
 
 const packageJson = require('../package.json');
 
@@ -24,13 +24,20 @@ program
         '-p, --path <path>',
         'Path to add config file, defaults to current directory',
     )
-    .option('-n, --name <name>', 'Custom file name for the config file')
+    .option(
+        '-c, --create-directories',
+        'Automatically creates intermediate directories in the given path if they do not exist',
+    )
     .option(
         '-t, --type <type>',
         'File type, either js or json, defaults to json',
     )
-    .option('-a, --append', 'Appends the config file to your package.json')
-    .option('-f, --force', 'Overwrites a config file if it already exists')
+    .option('-P, --package-json', 'Adds the config file to your package.json')
+    .option('-w, --write', 'Overwrites a config file if it already exists')
+    .option(
+        '-f, --force',
+        'Equivalent to calling both --path-create and --write',
+    )
     .action(addCommand);
 
 program.parse(process.argv);
