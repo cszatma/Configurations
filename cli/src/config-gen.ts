@@ -1,6 +1,4 @@
-import chalk from 'chalk';
 import commander from 'commander';
-import fs from 'fs-extra';
 
 import addCommand from './commands/add';
 import stripScope from './utils/strip-scope';

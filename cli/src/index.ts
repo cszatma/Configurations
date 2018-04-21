@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
-import chalk from 'chalk';
-import semver from 'semver';
+/* tslint:disable */
 
-const currentNodeVersion = process.versions.node;
+var chalk = require('chalk');
+var semver = require('semver');
+
+var currentNodeVersion = process.versions.node;
 
 if (semver.lt(currentNodeVersion, '6.0.0')) {
     console.log(
@@ -17,4 +19,4 @@ if (semver.lt(currentNodeVersion, '6.0.0')) {
     process.exit(1);
 }
 
-import './config-gen';
+require('./config-gen');
