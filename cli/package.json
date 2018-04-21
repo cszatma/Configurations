@@ -1,6 +1,6 @@
 {
   "name": "config-gen",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CLI to generate js/json configuration files for various packages",
   "keywords": [
     "config gen",
