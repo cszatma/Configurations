@@ -20,6 +20,9 @@
   "bin": {
     "config-gen": "build/index.js"
   },
+  "files": [
+    "build/"
+  ],
   "engines": {
     "node": ">=6"
   },
@@ -50,6 +53,7 @@
     "config-gen": "node build/index.js",
     "lint": "tslint -p ./tsconfig.json --fix",
     "precommit": "lint-staged",
+    "prepare": "yarn run build",
     "test": "jest",
     "test-watch": "jest --watch",
     "watch": "tsc -w"
