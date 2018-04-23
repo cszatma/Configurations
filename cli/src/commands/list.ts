@@ -4,7 +4,7 @@ import logError from '../utils/log-error';
 export default function list(config?: string) {
     if (!config) {
         listAllCommands();
-        process.exit(0);
+        return process.exit(0);
     }
 
     listAvailableFileTypes(config);

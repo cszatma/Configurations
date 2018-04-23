@@ -1,5 +1,7 @@
 // List of available config types
 
+import { Optional } from '../types/aliases';
+
 export interface ConfigType {
     readonly defaultType: string;
     readonly fileTypes: string[];
@@ -7,7 +9,7 @@ export interface ConfigType {
         readonly js?: string;
         readonly json?: string;
         readonly packageJson?: string;
-        readonly [key: string]: string;
+        readonly [key: string]: Optional<string>;
     };
     readonly name: string;
     readonly supportsPackageJson: boolean;

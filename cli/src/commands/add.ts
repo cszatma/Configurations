@@ -16,7 +16,7 @@ export interface AddOptions {
     force: boolean;
 }
 
-export default function add(configName: string, options?: AddOptions) {
+export default function add(configName: string, options: AddOptions) {
     const writeDirectory = options.path || process.cwd();
 
     // If a custom path was specified make sure it exists
@@ -39,7 +39,7 @@ export default function add(configName: string, options?: AddOptions) {
         console.log(
             'Use `config-gen list` to list all available config types.',
         );
-        process.exit(1);
+        return process.exit(1);
     }
 
     const configType = options.type
@@ -53,7 +53,7 @@ export default function add(configName: string, options?: AddOptions) {
                 config.name
             }`,
         );
-        process.exit(1);
+        return process.exit(1);
     }
 
     const configTemplate = require('../templates/' + config.name);
@@ -86,7 +86,9 @@ export default function add(configName: string, options?: AddOptions) {
         }
 
         const packageJson = require(packageJsonPath);
-        packageJson[config.fileNames.packageJson] = configTemplate;
+        // config.fileNmaes.packageJson can't be undefined since we
+        // already checked config.supportsPackageJson
+        packageJson[config.fileNames.packageJson!] = configTemplate;
 
         fs.writeFileSync(
             packageJsonPath,
@@ -103,7 +105,7 @@ export default function add(configName: string, options?: AddOptions) {
     }
 
     const configFileName = config.fileNames[configType];
-    const writePath = path.join(writeDirectory, configFileName);
+    const writePath = path.join(writeDirectory, configFileName!);
 
     // If force option was not enabled, check that the file doesn't already exist
     if (!options.force && !options.write) {
