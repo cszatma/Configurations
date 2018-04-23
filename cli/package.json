@@ -51,7 +51,7 @@
     "typescript": "^2.8.3"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p ./tsconfig.build.json",
     "clean": "rm -rf build/",
     "config-gen": "node build/index.js",
     "lint": "tslint -p ./tsconfig.json --fix",
@@ -59,7 +59,7 @@
     "prepare": "yarn run clean && yarn run build",
     "test": "jest",
     "test-watch": "jest --watch",
-    "watch": "tsc -w"
+    "watch": "tsc -p ./tsconfig.build.json -w"
   },
   "prettier": {
     "parser": "typescript",
