@@ -12,7 +12,12 @@ describe('Tests for the add command', () => {
     });
 
     afterAll(() => {
-        ['.prettierrc.json', '.eslintrc.js', 'package.json'].forEach(file => {
+        [
+            '.prettierrc.json',
+            '.eslintrc.js',
+            '.lintstagedrc.yml',
+            'package.json',
+        ].forEach(file => {
             fs.unlinkSync(resolveFile(file));
         });
     });
@@ -38,6 +43,19 @@ describe('Tests for the add command', () => {
 
         expect(code).toBe(0);
         expect(stdout).toBe(`Successfully wrote eslint config to ${file}.\n`);
+        expect(fs.existsSync(file)).toBe(true);
+    });
+
+    it('should create a .lintstagedrc.yml file', async () => {
+        const { code, stdout } = await runConfigGenCLI(
+            'add lint-staged --type yml',
+        );
+        const file = resolveFile('.lintstagedrc.yml');
+
+        expect(code).toBe(0);
+        expect(stdout).toBe(
+            `Successfully wrote lint-staged config to ${file}.\n`,
+        );
         expect(fs.existsSync(file)).toBe(true);
     });
 
