@@ -15,6 +15,7 @@ exports[`Tests for the list command should list all available file types for a g
 "Available file types for eslint:
  - js
  - json
+ - yaml
 Supports package.json: yes
 "
 `;
