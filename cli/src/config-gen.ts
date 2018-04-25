@@ -1,7 +1,6 @@
 import { Command } from 'commander';
 
-import addCommand from './commands/add';
-import listCommand from './commands/list';
+import commands from './commands';
 import { logError } from './utils/process-utils';
 import './utils/type-extensions';
 
@@ -43,7 +42,7 @@ program
         '-f, --force',
         'Equivalent to calling both --create-directories and --write',
     )
-    .action(addCommand);
+    .action(commands.add);
 
 program
     .command('list [config]')
@@ -52,7 +51,7 @@ program
         'List all available configs or list available file types for a given config',
     )
     .usage('[options]')
-    .action(listCommand);
+    .action(commands.list);
 
 program.command('*', '', { noHelp: true }).action(command => {
     logError(`Error: ${command} is not a valid command!`);
