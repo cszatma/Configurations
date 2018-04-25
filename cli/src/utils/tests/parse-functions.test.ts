@@ -19,4 +19,12 @@ describe('Test parse functions', () => {
     it('should return null for ts', () => {
         expect(parseConfigType('ts', configTypes.eslint)).toBeUndefined();
     });
+
+    it('should return yaml', () => {
+        expect(parseConfigType('yaml', configTypes.eslint)).toBe('yaml');
+    });
+
+    it('should return yaml for `yml`', () => {
+        expect(parseConfigType('yml', configTypes.eslint)).toBe('yaml');
+    });
 });
