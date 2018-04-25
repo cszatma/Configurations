@@ -1,9 +1,13 @@
-import chalk from 'chalk';
 import fs from 'fs-extra';
 import path from 'path';
 
-import logError from '../utils/log-error';
 import { parseConfigName, parseConfigType } from '../utils/parse-functions';
+import {
+    currentDir,
+    exitFailure,
+    exitSuccess,
+    logError,
+} from '../utils/process-utils';
 import { createJsFile, createJsonFile } from '../utils/util-functions';
 
 export interface AddOptions {
@@ -25,8 +29,7 @@ export default function add(configName: string, options: AddOptions) {
             // Create the directory as specified
             fs.mkdirSync(writeDirectory);
         } else {
-            logError(`Error: ${writeDirectory} does not exist!`);
-            process.exit(1);
+            exitFailure(`Error: ${writeDirectory} does not exist!`);
         }
     }
 
@@ -48,41 +51,37 @@ export default function add(configName: string, options: AddOptions) {
 
     // Verify it's a valid file type
     if (!configType) {
-        logError(
+        return exitFailure(
             `Error: ${options.type} file type is not supported by ${
                 config.name
             }`,
         );
-        return process.exit(1);
     }
 
     const configTemplate = require('../templates/' + config.name);
     const indentAmount = options.indent ? parseInt(options.indent, 10) : 2;
 
     if (!indentAmount) {
-        logError(
+        exitFailure(
             'Error: A valid integer must be specified for the indent option.',
         );
-        process.exit(1);
     }
 
     // Add the config to the package.json
     if (options.packageJson) {
         // Check that package.json is supported
         if (!config.supportsPackageJson) {
-            logError(
+            exitFailure(
                 `Error: ${
                     config.name
                 } does not support configuration through a package.json.`,
             );
-            process.exit(1);
         }
 
         // Check that a package.json exists and import it
         const packageJsonPath = path.join(writeDirectory, 'package.json');
         if (!fs.existsSync(packageJsonPath)) {
-            logError('Error: No package.json in the current directory!');
-            process.exit(1);
+            exitFailure('Error: No package.json in the current directory!');
         }
 
         const packageJson = require(packageJsonPath);
@@ -96,12 +95,9 @@ export default function add(configName: string, options: AddOptions) {
             'utf8',
         );
 
-        console.log(
-            chalk.green(
-                `Successfully wrote ${config.name} config to package.json.`,
-            ),
+        exitSuccess(
+            `Successfully wrote ${config.name} config to package.json.`,
         );
-        process.exit(0);
     }
 
     const configFileName = config.fileNames[configType];
@@ -110,8 +106,7 @@ export default function add(configName: string, options: AddOptions) {
     // If force option was not enabled, check that the file doesn't already exist
     if (!options.force && !options.write) {
         if (fs.existsSync(writePath)) {
-            logError(`${configFileName} already exists! Aborting.`);
-            process.exit(1);
+            exitFailure(`${configFileName} already exists! Aborting.`);
         }
     }
 
@@ -124,19 +119,14 @@ export default function add(configName: string, options: AddOptions) {
     // Write the file
     try {
         fs.writeFileSync(writePath, fileToWrite, 'utf8');
-        console.log(
-            chalk.green(
-                `Successfully wrote ${config.name} config to ${writePath}.`,
-            ),
+        exitSuccess(
+            `Successfully wrote ${config.name} config to ${writePath}.`,
         );
-        process.exit(0);
     } catch (error) {
-        logError(
+        exitFailure(
             `An error occured will writing ${
                 config.name
-            } config to ${writePath}:`,
+            } config to ${writePath}:\n` + error,
         );
-        logError(error);
-        process.exit(1);
     }
 }
