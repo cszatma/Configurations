@@ -30,4 +30,12 @@ describe('Test standard type extensions', () => {
     it('should return false for array.includes a value that does not exist', () => {
         expect(testArray.includes(6)).toBe(false);
     });
+
+    it('should return the last element which is 4', () => {
+        expect([1, 2, 3, 4].last()).toBe(4);
+    });
+
+    it('should return the last element which is `d`', () => {
+        expect(['a', 'b', 'c', 'd'].last()).toBe('d');
+    });
 });

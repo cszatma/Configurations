@@ -8,6 +8,7 @@ Object.values = <T>(o: { [p: string]: T }): T[] => {
 
 interface Array<T> {
     includes(searchElement: T, fromIndex?: number): boolean;
+    last(): T;
 }
 
 Array.prototype.includes = function<T>(
@@ -25,4 +26,8 @@ Array.prototype.includes = function<T>(
     }
 
     return false;
+};
+
+Array.prototype.last = function<T>(): T {
+    return this[this.length - 1];
 };
