@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests for the list command should list all available configs 1`] = `
+"Available configurations:
+ - babel
+ - eslint
+ - lint-staged
+ - prettier
+ - ts
+ - tslint
+"
+`;
+
+exports[`Tests for the list command should list all available file types for a given config 1`] = `
+"Available file types for eslint:
+ - js
+ - json
+Supports package.json: yes
+"
+`;
+
+exports[`Tests for the list command should word with the ls alias 1`] = `
+"Available configurations:
+ - babel
+ - eslint
+ - lint-staged
+ - prettier
+ - ts
+ - tslint
+"
+`;

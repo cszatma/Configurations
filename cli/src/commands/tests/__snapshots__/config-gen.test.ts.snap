@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test general config-gen options should print the help for config-gen 1`] = `
+"
+  Usage: config-gen [options] [command]
+
+  Options:
+
+    -v, --version                output the version number
+    -h, --help                   output usage information
+
+  Commands:
+
+    add [options] <config-name>  Adds the given configuration file to your project
+    list|ls [config]             List all available configs or list available file types for a given config
+
+Run \`config-gen COMMAND --help\` for more information about a given command.
+"
+`;
+
+exports[`Test general config-gen options should print the help when no arguments are passed 1`] = `
+"
+  Usage: config-gen [options] [command]
+
+  Options:
+
+    -v, --version                output the version number
+    -h, --help                   output usage information
+
+  Commands:
+
+    add [options] <config-name>  Adds the given configuration file to your project
+    list|ls [config]             List all available configs or list available file types for a given config
+
+Run \`config-gen COMMAND --help\` for more information about a given command.
+"
+`;
