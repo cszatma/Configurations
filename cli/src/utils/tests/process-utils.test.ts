@@ -29,6 +29,13 @@ describe('Test process-utils', () => {
         expect(stderrData).toBe(chalk.red('Error message'));
     });
 
+    it('should console.error multiple messages', () => {
+        processUtils.logError('Error message', 'Another error message');
+        expect(stderrData).toBe(
+            chalk.red('Error message Another error message'),
+        );
+    });
+
     it('should console.log the message', () => {
         processUtils.logSuccess('Success message');
         expect(stdoutData).toBe(chalk.green('Success message'));
