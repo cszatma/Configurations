@@ -1,44 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tests for the add command should add an eslintConfig object to package.json 1`] = `
-"Successfully wrote eslint config to package.json.
-"
-`;
-
-exports[`Tests for the add command should create a .eslintrc.js file 1`] = `
-"Successfully wrote eslint config to /Users/christopherszatmary/Developer/Global/Configurations/cli/src/commands/tests/.eslintrc.js.
-"
-`;
-
-exports[`Tests for the add command should create a .prettierrc.json file 1`] = `
-"Successfully wrote prettier config to /Users/christopherszatmary/Developer/Global/Configurations/cli/src/commands/tests/.prettierrc.json.
-"
-`;
-
-exports[`Tests for the add command should create the file even though it exists since -w is passed 1`] = `
-"Successfully wrote prettier config to /Users/christopherszatmary/Developer/Global/Configurations/cli/src/commands/tests/.prettierrc.json.
-"
-`;
-
-exports[`Tests for the add command should print the help for config-gen 1`] = `
-"
-  Usage: config-gen [options] [command]
-
-  Options:
-
-    -v, --version                output the version number
-    -h, --help                   output usage information
-
-  Commands:
-
-    add [options] <config-name>  Adds the given configuration file to your project
-    list|ls [config]             List all available configs or list available file types for a given config
-    help
-
-Run \`config-gen COMMAND --help\` for more information about a given command.
-"
-`;
-
 exports[`Tests for the add command should print the help for config-gen add 1`] = `
 "
   Usage: add <config-name> [options]
@@ -55,10 +16,5 @@ exports[`Tests for the add command should print the help for config-gen add 1`] 
     -w, --write               Overwrites a config file if it already exists
     -f, --force               Equivalent to calling both --create-directories and --write
     -h, --help                output usage information
-"
-`;
-
-exports[`Tests for the add command should return an error since eslintrc.js already exists 1`] = `
-".eslintrc.js already exists! Aborting.
 "
 `;
