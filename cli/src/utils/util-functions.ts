@@ -1,4 +1,6 @@
+import yaml from 'js-yaml';
 import stringifyObject from 'stringify-object';
+import { FileType } from './config-types';
 
 export function stripScope(name: string): string {
     if (name.charAt(0) === '@') {
@@ -9,8 +11,8 @@ export function stripScope(name: string): string {
     return name;
 }
 
-export function createJsonFile(object: any, space: number = 2): string {
-    return JSON.stringify(object, null, space);
+export function createJsonFile(object: any, indent: number = 2): string {
+    return JSON.stringify(object, null, indent);
 }
 
 export function createJsFile(object: any, indent: number = 2): string {
@@ -18,4 +20,25 @@ export function createJsFile(object: any, indent: number = 2): string {
         indent: ' '.repeat(indent),
     });
     return `module.exports = ${stringifiedObject};`;
+}
+
+export function createYamlFile(object: any, indent: number = 2): string {
+    return yaml.dump(object, { indent });
+}
+
+export function createConfigFile(
+    template: any,
+    fileType: FileType,
+    indent?: number,
+): string {
+    switch (fileType) {
+        case 'json':
+            return createJsonFile(template, indent);
+        case 'js':
+            return createJsFile(template, indent);
+        case 'yaml':
+            return createYamlFile(template, indent);
+    }
+
+    throw new Error(`Invalid file type ${fileType}`);
 }

@@ -2,13 +2,8 @@ import fs from 'fs-extra';
 import path from 'path';
 
 import { parseConfigName, parseConfigType } from '../utils/parse-functions';
-import {
-    currentDir,
-    exitFailure,
-    exitSuccess,
-    logError,
-} from '../utils/process-utils';
-import { createJsFile, createJsonFile } from '../utils/util-functions';
+import { exitFailure, exitSuccess, logError } from '../utils/process-utils';
+import { createConfigFile, createJsonFile } from '../utils/util-functions';
 
 export interface AddOptions {
     path: string;
@@ -111,10 +106,11 @@ export default function add(configName: string, options: AddOptions) {
     }
 
     // Create the appropriate file
-    const fileToWrite =
-        configType === 'js'
-            ? createJsFile(configTemplate, indentAmount)
-            : createJsonFile(configTemplate, indentAmount);
+    const fileToWrite = createConfigFile(
+        configTemplate,
+        configType,
+        indentAmount,
+    );
 
     // Write the file
     try {
