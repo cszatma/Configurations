@@ -2,7 +2,7 @@ import { Command } from 'commander';
 
 import addCommand from './commands/add';
 import listCommand from './commands/list';
-import logError from './utils/log-error';
+import { logError } from './utils/process-utils';
 import './utils/type-extensions';
 
 const packageJson = require('../package.json');
@@ -56,19 +56,15 @@ program
 
 program.command('help').action(() => program.help());
 
+program.command('*').action(() => {
+    logError(`Error: ${program.args[0]} is not a valid command!`);
+    console.log('Use `config-gen --help` to see a list of available commands.');
+    process.exit(1);
+});
+
 program.parse(process.argv);
 
 if (program.args.length < 1) {
     program.help();
     process.exit(0);
-}
-
-const availableCommands = program.commands.map((command: Command) =>
-    command.name(),
-);
-
-if (!availableCommands.includes(program.args[0])) {
-    logError(`Error: ${program.args[0]} is not a valid command!`);
-    console.log('Use `config-gen --help` to see a list of available commands.');
-    process.exit(1);
 }
