@@ -1,5 +1,9 @@
 import { Optional } from '../types/aliases';
-import configTypes, { ConfigType } from './config-types';
+import configTypes, {
+    ConfigType,
+    FILE_ALIASES,
+    FileType,
+} from './config-types';
 
 export function parseConfigName(configName: string): Optional<ConfigType> {
     const normalizedName = configName.trim().toLowerCase();
@@ -13,9 +17,9 @@ export function parseConfigName(configName: string): Optional<ConfigType> {
 export function parseConfigType(
     type: string,
     config: ConfigType,
-): Optional<string> {
-    const normalizedType = type.trim().toLowerCase();
-    return config.fileTypes.includes(normalizedType)
-        ? normalizedType
-        : undefined;
+): Optional<FileType> {
+    const normalizedType = type.trim().toLowerCase() as FileType;
+    const fileType = FILE_ALIASES.get(normalizedType) || normalizedType;
+
+    return config.fileTypes.includes(fileType) ? fileType : undefined;
 }
