@@ -55,9 +55,9 @@ const lintStaged: ConfigType = {
     defaultType: 'json',
     fileNames: {
         js: 'lint-staged.config.js',
-        json: '.lintstagedrc',
+        json: '.lintstagedrc.json',
         packageJson: 'lint-staged',
-        yaml: '.lintstagedrc',
+        yaml: '.lintstagedrc.yml',
     },
     fileTypes: ['js', 'json', 'yaml'],
     name: 'lint-staged',
