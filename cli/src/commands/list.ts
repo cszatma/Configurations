@@ -1,5 +1,5 @@
 import configTypes from '../utils/config-types';
-import logError from '../utils/log-error';
+import { logError } from '../utils/process-utils';
 
 export default function list(config?: string) {
     if (!config) {
