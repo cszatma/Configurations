@@ -54,10 +54,8 @@ program
     .usage('[options]')
     .action(listCommand);
 
-program.command('help').action(() => program.help());
-
-program.command('*').action(() => {
-    logError(`Error: ${program.args[0]} is not a valid command!`);
+program.command('*', '', { noHelp: true }).action(command => {
+    logError(`Error: ${command} is not a valid command!`);
     console.log('Use `config-gen --help` to see a list of available commands.');
     process.exit(1);
 });
