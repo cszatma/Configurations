@@ -2,12 +2,20 @@
 
 import { Optional } from '../types/aliases';
 
+export type FileType = 'js' | 'json' | 'yaml';
+
+export const FILE_TYPES: FileType[] = ['js', 'json', 'yaml'];
+export const FILE_ALIASES: Map<string, FileType> = new Map<string, FileType>([
+    ['yml', 'yaml'],
+]);
+
 export interface ConfigType {
-    readonly defaultType: string;
-    readonly fileTypes: string[];
+    readonly defaultType: FileType;
+    readonly fileTypes: FileType[];
     readonly fileNames: {
         readonly js?: string;
         readonly json?: string;
+        readonly yaml?: string;
         readonly packageJson?: string;
         readonly [key: string]: Optional<string>;
     };
@@ -36,8 +44,9 @@ const eslint: ConfigType = {
         js: '.eslintrc.js',
         json: '.eslintrc.json',
         packageJson: 'eslintConfig',
+        yaml: '.eslintrc.yml',
     },
-    fileTypes: ['js', 'json'],
+    fileTypes: ['js', 'json', 'yaml'],
     name: 'eslint',
     supportsPackageJson: true,
 };
@@ -48,8 +57,9 @@ const lintStaged: ConfigType = {
         js: 'lint-staged.config.js',
         json: '.lintstagedrc',
         packageJson: 'lint-staged',
+        yaml: '.lintstagedrc',
     },
-    fileTypes: ['js', 'json'],
+    fileTypes: ['js', 'json', 'yaml'],
     name: 'lint-staged',
     supportsPackageJson: true,
 };
@@ -60,8 +70,9 @@ const prettier: ConfigType = {
         js: 'prettier.config.js',
         json: '.prettierrc.json',
         packageJson: 'prettier',
+        yaml: '.prettierrc.yml',
     },
-    fileTypes: ['js', 'json'],
+    fileTypes: ['js', 'json', 'yaml'],
     name: 'prettier',
     supportsPackageJson: true,
 };
