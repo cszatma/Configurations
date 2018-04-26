@@ -24,6 +24,9 @@
   "bin": {
     "config-gen": "build/index.js"
   },
+  "files": [
+    "build/"
+  ],
   "engines": {
     "node": ">=6"
   },

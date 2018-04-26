@@ -1,7 +1,0 @@
-**/tests/
-*.test.*
-src/
-yarn-error.log
-jest.config.js
-tsconfig.json
-tslint.json
