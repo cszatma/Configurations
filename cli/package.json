@@ -59,6 +59,7 @@
     "build": "tsc -p ./tsconfig.build.json",
     "clean": "rm -rf build/",
     "config-gen": "node build/index.js",
+    "format": "prettier --write \"./**/*.{ts,js,json}\"",
     "lint": "tslint -p ./tsconfig.json --fix",
     "precommit": "lint-staged",
     "prepare": "yarn run clean && yarn run build",
@@ -67,14 +68,17 @@
     "watch": "tsc -p ./tsconfig.build.json -w"
   },
   "prettier": {
-    "parser": "typescript",
     "trailingComma": "all",
     "singleQuote": true,
-    "tabWidth": 4
+    "tabWidth": 2
   },
   "lint-staged": {
     "*.ts": [
       "tslint -p ./tsconfig.json --fix",
+      "git add"
+    ],
+    "*.{js,json}": [
+      "prettier --write",
       "git add"
     ]
   }

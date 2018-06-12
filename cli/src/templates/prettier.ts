@@ -1,6 +1,6 @@
 module.exports = {
-    parser: 'babylon',
-    singleQuote: true,
-    tabWidth: 2,
-    trailingComma: 'all',
+  parser: 'babylon',
+  singleQuote: true,
+  tabWidth: 2,
+  trailingComma: 'all',
 };
