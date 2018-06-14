@@ -1,5 +1,3 @@
-/* tslint:disable:object-literal-sort-keys */
-
 module.exports = {
   env: {
     es6: true,

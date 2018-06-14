@@ -1,5 +1,3 @@
-/* tslint:disable:object-literal-sort-keys */
-
 module.exports = {
   defaultSeverity: 'error',
   extends: ['tslint:latest'],
