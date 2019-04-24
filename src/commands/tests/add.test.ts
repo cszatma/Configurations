@@ -1,6 +1,7 @@
 import fs from 'fs-extra';
 import 'jest';
 import path from 'path';
+import chalk from 'chalk';
 
 import { runConfigGenCLI } from './test-utils';
 
@@ -33,7 +34,9 @@ describe('Tests for the add command', () => {
     const file = resolveFile('.prettierrc.json');
 
     expect(code).toBe(0);
-    expect(stdout).toBe(`Successfully wrote prettier config to ${file}.\n`);
+    expect(stdout).toBe(
+      `${chalk.green(`Successfully wrote prettier config to ${file}.`)}\n`,
+    );
     expect(fs.existsSync(file)).toBe(true);
   });
 
@@ -42,7 +45,9 @@ describe('Tests for the add command', () => {
     const file = resolveFile('.eslintrc.js');
 
     expect(code).toBe(0);
-    expect(stdout).toBe(`Successfully wrote eslint config to ${file}.\n`);
+    expect(stdout).toBe(
+      `${chalk.green(`Successfully wrote eslint config to ${file}.`)}\n`,
+    );
     expect(fs.existsSync(file)).toBe(true);
   });
 
@@ -53,14 +58,18 @@ describe('Tests for the add command', () => {
     const file = resolveFile('.lintstagedrc.yml');
 
     expect(code).toBe(0);
-    expect(stdout).toBe(`Successfully wrote lint-staged config to ${file}.\n`);
+    expect(stdout).toBe(
+      `${chalk.green(`Successfully wrote lint-staged config to ${file}.`)}\n`,
+    );
     expect(fs.existsSync(file)).toBe(true);
   });
 
   it('should return an error since eslintrc.js already exists', () => {
     return runConfigGenCLI('add prettier').catch(({ code, stderr }) => {
       expect(code).toBe(1);
-      expect(stderr).toBe('.prettierrc.json already exists! Aborting.\n');
+      expect(stderr).toBe(
+        `${chalk.red('.prettierrc.json already exists! Aborting.')}\n`,
+      );
     });
   });
 
@@ -69,7 +78,9 @@ describe('Tests for the add command', () => {
     const file = resolveFile('.prettierrc.json');
 
     expect(code).toBe(0);
-    expect(stdout).toBe(`Successfully wrote prettier config to ${file}.\n`);
+    expect(stdout).toBe(
+      `${chalk.green(`Successfully wrote prettier config to ${file}.`)}\n`,
+    );
     expect(fs.existsSync(file)).toBe(true);
   });
 
@@ -77,7 +88,9 @@ describe('Tests for the add command', () => {
     const { code, stdout } = await runConfigGenCLI('add eslint --package-json');
 
     expect(code).toBe(0);
-    expect(stdout).toBe('Successfully wrote eslint config to package.json.\n');
+    expect(stdout).toBe(
+      `${chalk.green('Successfully wrote eslint config to package.json.')}\n`,
+    );
 
     const packageJson = require(resolveFile('package.json'));
     const template = require(resolveFile('../../templates/eslint'));
