@@ -14,11 +14,15 @@ export function parseConfigName(configName: string): Optional<ConfigType> {
   );
 }
 
-export function parseConfigType(
+export function parseFileType(
   type: string,
   config: ConfigType,
 ): Optional<FileType> {
-  const normalizedType = type.trim().toLowerCase() as FileType;
+  const trimmed = type.trim();
+  const normalizedType = (trimmed.charAt(0) === '.'
+    ? trimmed.slice(1)
+    : trimmed
+  ).toLowerCase() as FileType;
   const fileType = FILE_ALIASES.get(normalizedType) || normalizedType;
 
   return config.fileTypes.includes(fileType) ? fileType : undefined;
