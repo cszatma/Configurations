@@ -83,7 +83,7 @@ const ts: ConfigType = {
     json: 'tsconfig.json',
   },
   fileTypes: ['json'],
-  name: 'ts',
+  name: 'typescript',
   supportsPackageJson: false,
 };
 
@@ -105,5 +105,9 @@ const configTypes: Configs = {
   ts,
   tslint,
 };
+
+export const configNames = Object.values(configTypes).map(
+  config => config.name,
+);
 
 export default configTypes;
