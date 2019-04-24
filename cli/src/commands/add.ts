@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 
-import { parseConfigName, parseConfigType } from '../utils/parse-functions';
+import { parseConfigName, parseFileType } from '../utils/parse-functions';
 import { exitFailure, exitSuccess, logError } from '../utils/process-utils';
 import { createConfigFile, createJsonFile } from '../utils/util-functions';
 
@@ -38,12 +38,12 @@ export default function add(configName: string, options: AddOptions) {
     return process.exit(1);
   }
 
-  const configType = options.type
-    ? parseConfigType(options.type, config)
+  const fileType = options.type
+    ? parseFileType(options.type, config)
     : config.defaultType;
 
   // Verify it's a valid file type
-  if (!configType) {
+  if (!fileType) {
     return exitFailure(
       `Error: ${options.type} file type is not supported by ${config.name}`,
     );
@@ -89,7 +89,7 @@ export default function add(configName: string, options: AddOptions) {
     exitSuccess(`Successfully wrote ${config.name} config to package.json.`);
   }
 
-  const configFileName = config.fileNames[configType];
+  const configFileName = config.fileNames[fileType];
   const writePath = path.join(writeDirectory, configFileName!);
 
   // If force option was not enabled, check that the file doesn't already exist
@@ -100,11 +100,7 @@ export default function add(configName: string, options: AddOptions) {
   }
 
   // Create the appropriate file
-  const fileToWrite = createConfigFile(
-    configTemplate,
-    configType,
-    indentAmount,
-  );
+  const fileToWrite = createConfigFile(configTemplate, fileType, indentAmount);
 
   // Write the file
   try {
