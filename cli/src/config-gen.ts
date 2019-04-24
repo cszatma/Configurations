@@ -4,17 +4,21 @@ import commands from './commands';
 import { logError } from './utils/process-utils';
 import './utils/type-extensions';
 
+type Program = Command & { optionValues: { name?: string } };
+
 const packageJson = require('../package.json');
 
 const programName = packageJson.name;
 
-const program = new Command(programName)
+const program: Program = new Command(programName)
   .version(packageJson.version, '-v, --version')
   .on('--help', () => {
     console.log(
       `\nRun \`${programName} COMMAND --help\` for more information about a given command.`,
     );
-  });
+  }) as Program;
+
+program.optionValues = {};
 
 program
   .command('add <config-name>')
@@ -49,6 +53,25 @@ program
   )
   .usage('[options]')
   .action(commands.list);
+
+program
+  .command('save <config-file>')
+  .description(
+    'Saves a config file to config-gen which can be regenerated later.',
+  )
+  .usage('<config-file> [options]')
+  .option('-n, --name <name>', 'Name of the config. Defaults to file name.')
+  .option(
+    '-f, --force',
+    'Replaces a config file with the same name if it already exists.',
+  )
+  .action(async (configFile: string, options: { force: boolean }) =>
+    commands.save(configFile, {
+      name: program.optionValues.name || '',
+      force: options.force,
+    }),
+  )
+  .on('option:name', opt => (program.optionValues.name = opt));
 
 program.command('*', '', { noHelp: true }).action(command => {
   logError(`Error: ${command} is not a valid command!`);
