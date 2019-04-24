@@ -1,7 +1,7 @@
 import 'jest';
 
 import configTypes from '../config-types';
-import { parseConfigName, parseConfigType } from '../parse-functions';
+import { parseConfigName, parseFileType } from '../parse-functions';
 
 describe('Test parse functions', () => {
   it('should return the prettier config object', () => {
@@ -13,18 +13,18 @@ describe('Test parse functions', () => {
   });
 
   it('should return the string `json`', () => {
-    expect(parseConfigType(' JSON   ', configTypes.eslint)).toBe('json');
+    expect(parseFileType(' JSON   ', configTypes.eslint)).toBe('json');
   });
 
   it('should return null for ts', () => {
-    expect(parseConfigType('ts', configTypes.eslint)).toBeUndefined();
+    expect(parseFileType('ts', configTypes.eslint)).toBeUndefined();
   });
 
   it('should return yaml', () => {
-    expect(parseConfigType('yaml', configTypes.eslint)).toBe('yaml');
+    expect(parseFileType('yaml', configTypes.eslint)).toBe('yaml');
   });
 
   it('should return yaml for `yml`', () => {
-    expect(parseConfigType('yml', configTypes.eslint)).toBe('yaml');
+    expect(parseFileType('yml', configTypes.eslint)).toBe('yaml');
   });
 });
