@@ -17,7 +17,8 @@ const emptyOptions = (): Options => ({
 
 export const configDir = path.join(os.homedir(), '.config-gen');
 export const rcPath = path.join(os.homedir(), '.configgenrc');
-const resolveConfig = (configName: string) => path.join(configDir, configName);
+export const resolveConfig = (configName: string) =>
+  path.join(configDir, configName);
 
 let cachedOptions: Options;
 
