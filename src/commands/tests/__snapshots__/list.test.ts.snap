@@ -6,7 +6,7 @@ exports[`Tests for the list command should list all available configs 1`] = `
  - eslint
  - lint-staged
  - prettier
- - ts
+ - typescript
  - tslint
 "
 `;
@@ -26,7 +26,7 @@ exports[`Tests for the list command should word with the ls alias 1`] = `
  - eslint
  - lint-staged
  - prettier
- - ts
+ - typescript
  - tslint
 "
 `;

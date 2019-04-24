@@ -1,20 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tests for the add command should print the help for config-gen add 1`] = `
-"
-  Usage: add <config-name> [options]
+"Usage: add <config-name> [options]
 
-  Adds the given configuration file to your project
+Adds the given configuration file to your project
 
-  Options:
-
-    -p, --path <path>         Path to add config file, defaults to current directory
-    -c, --create-directories  Automatically creates intermediate directories in the given path if they do not exist
-    -t, --type <type>         File type, either js or json, defaults to json
-    -i, --indent <indent>     Sets the indentation amount for the config file, defaults to 2
-    -P, --package-json        Adds the config file to your package.json
-    -w, --write               Overwrites a config file if it already exists
-    -f, --force               Equivalent to calling both --create-directories and --write
-    -h, --help                output usage information
+Options:
+  -p, --path <path>         Path to add config file, defaults to current directory
+  -c, --create-directories  Automatically creates intermediate directories in the given path if they do not exist
+  -t, --type <type>         File type, either js or json, defaults to json
+  -i, --indent <indent>     Sets the indentation amount for the config file, defaults to 2
+  -P, --package-json        Adds the config file to your package.json
+  -w, --write               Overwrites a config file if it already exists
+  -f, --force               Equivalent to calling both --create-directories and --write
+  -h, --help                output usage information
 "
 `;
