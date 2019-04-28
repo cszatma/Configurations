@@ -73,6 +73,13 @@ program
   )
   .on('option:name', opt => (program.optionValues.name = opt));
 
+program
+  .command('delete <config-name>')
+  .description('Deletes a custom config that was previously saved.')
+  .usage('<config-name> [options]')
+  .option('-f, --force', 'Does not prompt for confirmation before deleting.')
+  .action(commands.delete);
+
 program.command('*', '', { noHelp: true }).action(command => {
   logError(`Error: ${command} is not a valid command!`);
   console.log('Use `config-gen --help` to see a list of available commands.');
