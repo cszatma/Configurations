@@ -60,13 +60,13 @@
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
     "clean": "rm -rf build/",
-    "config-gen": "node build/index.js",
+    "config-gen": "NODE_ENV=dev node build/index.js",
     "format": "prettier --write \"./**/*.{ts,js,json}\"",
     "lint": "tslint -p ./tsconfig.json --fix",
     "prepare": "yarn run clean && yarn run build",
     "test": "jest",
     "test-watch": "jest --watch",
-    "ts-config-gen": "ts-node src/index.ts",
+    "ts-config-gen": "NODE_ENV=dev ts-node src/index.ts",
     "watch": "tsc -p ./tsconfig.build.json -w"
   },
   "prettier": {

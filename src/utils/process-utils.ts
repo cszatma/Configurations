@@ -23,9 +23,10 @@ export function exitSuccess(message?: any, ...optionalParams: any[]) {
   process.exit(0);
 }
 
-export function currentDir(): string {
-  return process
-    .cwd()
-    .split(path.sep)
-    .last();
+export function cwd(): string {
+  if (process.env.NODE_ENV === 'dev' && process.env.INIT_CWD) {
+    return process.env.INIT_CWD;
+  }
+
+  return process.cwd();
 }
