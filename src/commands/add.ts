@@ -2,8 +2,14 @@ import fs from 'fs-extra';
 import path from 'path';
 
 import { parseConfigName, parseFileType } from '../utils/parse-functions';
-import { exitFailure, exitSuccess, logError } from '../utils/process-utils';
+import {
+  cwd,
+  exitFailure,
+  exitSuccess,
+  logError,
+} from '../utils/process-utils';
 import { createConfigFile, createJsonFile } from '../utils/util-functions';
+import { resolveConfig } from '../utils/options';
 
 export interface AddOptions {
   path: string;
@@ -16,7 +22,7 @@ export interface AddOptions {
 }
 
 export default function add(configName: string, options: AddOptions) {
-  const writeDirectory = options.path || process.cwd();
+  const writeDirectory = options.path || cwd();
 
   // If a custom path was specified make sure it exists
   if (!fs.existsSync(writeDirectory)) {
@@ -29,7 +35,7 @@ export default function add(configName: string, options: AddOptions) {
   }
 
   // Get the config type
-  const config = parseConfigName(configName);
+  const { config, isCustom } = parseConfigName(configName);
 
   // If config is null then configName was not a valid config
   if (!config) {
@@ -49,7 +55,11 @@ export default function add(configName: string, options: AddOptions) {
     );
   }
 
-  const configTemplate = require('../templates/' + config.name);
+  // Get config file
+  const configPath = isCustom
+    ? resolveConfig(configName)
+    : `../templates/${config.name}`;
+  const configTemplate = require(configPath);
   const indentAmount = options.indent ? parseInt(options.indent, 10) : 2;
 
   if (!indentAmount) {
