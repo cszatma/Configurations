@@ -70,7 +70,7 @@ export default async function save(
     copyConfigFile(configFile, configName);
     exitSuccess(`Successfully saved ${configName}.`);
   } catch (error) {
-    exitFailure(`An error occured will saving ${configName}:\n` + error);
+    exitFailure(`An error occurred while saving ${configName}:\n` + error);
   }
 }
 
