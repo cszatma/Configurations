@@ -66,3 +66,10 @@ export function saveCustomConfig(
 
   saveOptions(options);
 }
+
+export function deleteCustomConfig(configName: string): void {
+  const options = loadOptions();
+  delete options.customConfigs[configName];
+
+  saveOptions(options);
+}
