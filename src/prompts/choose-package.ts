@@ -1,7 +1,8 @@
 import inquirer, { Question } from 'inquirer';
 
-import { configNames, ConfigType, findConfig } from '../utils/config-types';
+import { configNames, ConfigType } from '../utils/config-types';
 import { Optional } from '../types/aliases';
+import { findConfigWithName } from '../utils/config-utils';
 
 interface Answer {
   packageName: string;
@@ -34,5 +35,5 @@ export default async function choosePackage(): Promise<Optional<ConfigType>> {
     return undefined;
   }
 
-  return findConfig(packageName);
+  return findConfigWithName(packageName);
 }
