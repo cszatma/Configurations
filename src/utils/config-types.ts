@@ -110,4 +110,7 @@ export const configNames = Object.values(configTypes).map(
   config => config.name,
 );
 
+export const findConfig = (name: string) =>
+  Object.values(configTypes).find(config => name === config.name);
+
 export default configTypes;
