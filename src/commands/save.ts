@@ -13,6 +13,7 @@ import choosePackage from '../prompts/choose-package';
 import { parseFileType } from '../utils/parse-functions';
 import readConfigFile from '../utils/read-config-file';
 import { createJsFile } from '../utils/util-functions';
+import { findConfigWithFileName } from '../utils/config-utils';
 
 export interface SaveOptions {
   name: string;
@@ -33,7 +34,7 @@ export default async function save(
   options: SaveOptions,
 ): Promise<void> {
   const pathInfo = path.parse(configFile);
-  const configName = options.name || pathInfo.name;
+  const configName = path.parse(options.name).name || pathInfo.name;
 
   // Make sure the name doesn't conflict with one of the defaults
   if (nameConficts(configName)) {
@@ -48,7 +49,8 @@ export default async function save(
     );
   }
 
-  const configType = await choosePackage();
+  const configType =
+    findConfigWithFileName(configFile) || (await choosePackage());
 
   // Check if __other__
   if (!configType) {
@@ -63,11 +65,10 @@ export default async function save(
     );
   }
 
-  // Save the config info and copy the file
-  saveCustomConfig(configName, configType);
-
   try {
+    // Save the config info and copy the file
     copyConfigFile(configFile, configName);
+    saveCustomConfig(configName, configType);
     exitSuccess(`Successfully saved ${configName}.`);
   } catch (error) {
     exitFailure(`An error occurred while saving ${configName}:\n` + error);
