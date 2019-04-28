@@ -1,6 +1,7 @@
 import { Optional } from '../types/aliases';
-import { ConfigType, FILE_ALIASES, FileType, findConfig } from './config-types';
+import { ConfigType, FILE_ALIASES, FileType } from './config-types';
 import { loadOptions } from './options';
+import { findConfigWithName } from './config-utils';
 
 export interface ParseResult {
   config?: ConfigType;
@@ -12,7 +13,7 @@ export function parseConfigName(configName: string): ParseResult {
   const isCustom = configName in customConfigs;
   const name = isCustom ? customConfigs[configName] : configName;
 
-  return { config: findConfig(name), isCustom };
+  return { config: findConfigWithName(name), isCustom };
 }
 
 export function parseFileType(

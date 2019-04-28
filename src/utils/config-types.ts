@@ -106,11 +106,8 @@ const configTypes: Configs = {
   tslint,
 };
 
-export const configNames = Object.values(configTypes).map(
-  config => config.name,
-);
+export const configTypesArray = Object.values(configTypes);
 
-export const findConfig = (name: string) =>
-  Object.values(configTypes).find(config => name === config.name);
+export const configNames = configTypesArray.map(config => config.name);
 
 export default configTypes;
