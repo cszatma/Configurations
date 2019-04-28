@@ -1,17 +1,18 @@
 import { Optional } from '../types/aliases';
-import configTypes, {
-  ConfigType,
-  FILE_ALIASES,
-  FileType,
-} from './config-types';
+import { ConfigType, FILE_ALIASES, FileType, findConfig } from './config-types';
+import { loadOptions } from './options';
 
-export function parseConfigName(configName: string): Optional<ConfigType> {
-  const normalizedName = configName.trim().toLowerCase();
+export interface ParseResult {
+  config?: ConfigType;
+  isCustom: boolean;
+}
 
-  // See if one of the configs matches the config name
-  return Object.values(configTypes).find(
-    config => normalizedName === config.name,
-  );
+export function parseConfigName(configName: string): ParseResult {
+  const customConfigs = loadOptions().customConfigs;
+  const isCustom = configName in customConfigs;
+  const name = isCustom ? customConfigs[configName] : configName;
+
+  return { config: findConfig(name), isCustom };
 }
 
 export function parseFileType(
