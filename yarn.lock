@@ -148,10 +148,10 @@
     eslint-config-airbnb-base "^13.2.0"
     eslint-config-prettier "^6.0.0"
 
-"@cszatma/process-utils@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@cszatma/process-utils/-/process-utils-0.1.0.tgz#2c13a1d843d5fdedd3fffaf76eb054be71f65659"
-  integrity sha512-wLVJArzc0CgetYdcbOR715KSDY1QEQCW5BZRLGmDjB6MIbnp6oIDPiV613j66wNecb8H5pH20yGsB3ee+cIVbQ==
+"@cszatma/process-utils@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@cszatma/process-utils/-/process-utils-0.1.1.tgz#2c36fc0325cf7b4714460b798f7430cd669ce5c6"
+  integrity sha512-hZHOnCXszs2lSkFnjx+Z6+UBJj/Kr0Mmn60Or2MzU8NqGz6usLFMViVCF3bH38k6gjYdZDuUfasSdvWMkvlrDw==
   dependencies:
     chalk "^2.4.2"
 
