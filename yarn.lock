@@ -148,6 +148,13 @@
     eslint-config-airbnb-base "^13.2.0"
     eslint-config-prettier "^6.0.0"
 
+"@cszatma/process-utils@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@cszatma/process-utils/-/process-utils-0.1.0.tgz#2c13a1d843d5fdedd3fffaf76eb054be71f65659"
+  integrity sha512-wLVJArzc0CgetYdcbOR715KSDY1QEQCW5BZRLGmDjB6MIbnp6oIDPiV613j66wNecb8H5pH20yGsB3ee+cIVbQ==
+  dependencies:
+    chalk "^2.4.2"
+
 "@jest/console@^24.7.1":
   version "24.7.1"
   resolved "https://registry.yarnpkg.com/@jest/console/-/console-24.7.1.tgz#32a9e42535a97aedfe037e725bd67e954b459545"
