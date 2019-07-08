@@ -9,7 +9,7 @@ export interface ParseResult {
 }
 
 export function parseConfigName(configName: string): ParseResult {
-  const customConfigs = loadOptions().customConfigs;
+  const { customConfigs } = loadOptions();
   const isCustom = configName in customConfigs;
   const name = isCustom ? customConfigs[configName] : configName;
 

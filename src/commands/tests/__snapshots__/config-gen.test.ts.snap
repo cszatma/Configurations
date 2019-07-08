@@ -4,13 +4,14 @@ exports[`Test general config-gen options should print the help for config-gen 1`
 "Usage: config-gen [options] [command]
 
 Options:
-  -v, --version                 output the version number
-  -h, --help                    output usage information
+  -v, --version                   output the version number
+  -h, --help                      output usage information
 
 Commands:
-  add [options] <config-name>   Adds the given configuration file to your project
-  list|ls [config]              List all available configs or list available file types for a given config
-  save [options] <config-file>  Saves a config file to config-gen which can be regenerated later.
+  add [options] <config-name>     Adds the given configuration file to your project
+  list|ls [config]                List all available configs or list available file types for a given config
+  save [options] <config-file>    Saves a config file to config-gen which can be regenerated later.
+  delete [options] <config-name>  Deletes a custom config that was previously saved.
 
 Run \`config-gen COMMAND --help\` for more information about a given command.
 "
@@ -20,13 +21,14 @@ exports[`Test general config-gen options should print the help when no arguments
 "Usage: config-gen [options] [command]
 
 Options:
-  -v, --version                 output the version number
-  -h, --help                    output usage information
+  -v, --version                   output the version number
+  -h, --help                      output usage information
 
 Commands:
-  add [options] <config-name>   Adds the given configuration file to your project
-  list|ls [config]              List all available configs or list available file types for a given config
-  save [options] <config-file>  Saves a config file to config-gen which can be regenerated later.
+  add [options] <config-name>     Adds the given configuration file to your project
+  list|ls [config]                List all available configs or list available file types for a given config
+  save [options] <config-file>    Saves a config file to config-gen which can be regenerated later.
+  delete [options] <config-name>  Deletes a custom config that was previously saved.
 
 Run \`config-gen COMMAND --help\` for more information about a given command.
 "

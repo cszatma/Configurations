@@ -7,7 +7,7 @@ export default function readConfigFile(filePath: string): any {
 
   if (fileExt === '.yaml' || fileExt === '.yml') {
     return yaml.safeLoad(fs.readFileSync(filePath, 'utf-8'));
-  } else {
-    return fs.readJsonSync(filePath);
   }
+
+  return fs.readJsonSync(filePath);
 }

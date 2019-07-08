@@ -1,11 +1,11 @@
 import fs from 'fs-extra';
+import { exitFailure, exitSuccess } from '@cszatma/process-utils';
 
 import {
   deleteCustomConfig,
   loadOptions,
   resolveConfig,
 } from '../utils/options';
-import { exitFailure, exitSuccess } from '../utils/process-utils';
 import confirmDelete from '../prompts/confirm-delete';
 
 interface DeleteOptions {
@@ -16,7 +16,7 @@ export default async function(
   configName: string,
   options: DeleteOptions,
 ): Promise<void> {
-  const customConfigs = loadOptions().customConfigs;
+  const { customConfigs } = loadOptions();
 
   if (!(configName in customConfigs)) {
     exitFailure(`Error: Config named ${configName} does not exist!`);
@@ -34,6 +34,6 @@ export default async function(
     fs.removeSync(resolveConfig(`${configName}.js`));
     exitSuccess(`Successfully deleted ${configName}.`);
   } catch (error) {
-    exitFailure(`An error occurred while deleting ${configName}:\n` + error);
+    exitFailure(`An error occurred while deleting ${configName}:\n${error}`);
   }
 }

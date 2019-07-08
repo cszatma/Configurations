@@ -1,14 +1,12 @@
-import 'jest';
 import chalk from 'chalk';
 
 import { runConfigGenCLI } from './test-utils';
-
-const rootPackageJson = require('../../../package.json');
+import rootPackageJson from '../../../package.json';
 
 describe('Test general config-gen options', () => {
   it('should print the version number', async () => {
     const { stdout } = await runConfigGenCLI('-v');
-    expect(stdout).toBe(rootPackageJson.version + '\n');
+    expect(stdout).toBe(`${rootPackageJson.version}\n`);
   });
 
   it('should print the help for config-gen', async () => {

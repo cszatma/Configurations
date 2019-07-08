@@ -1,15 +1,19 @@
-import 'jest';
-
 import configTypes from '../config-types';
 import { parseConfigName, parseFileType } from '../parse-functions';
 
 describe('Test parse functions', () => {
   it('should return the prettier config object', () => {
-    expect(parseConfigName('prettier')).toBe(configTypes.prettier);
+    expect(parseConfigName('prettier')).toEqual({
+      config: configTypes.prettier,
+      isCustom: false,
+    });
   });
 
   it('should return the eslint config object', () => {
-    expect(parseConfigName('eslint')).toBe(configTypes.eslint);
+    expect(parseConfigName('eslint')).toEqual({
+      config: configTypes.eslint,
+      isCustom: false,
+    });
   });
 
   it('should return the string `json`', () => {

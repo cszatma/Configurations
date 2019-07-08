@@ -1,5 +1,4 @@
 import { spawn } from 'child_process';
-import 'jest';
 
 export interface CLIStatus {
   code: number;
@@ -31,6 +30,7 @@ export function runConfigGenCLI(args: string): Promise<CLIStatus> {
 
     childProcess.on('close', code => {
       if (stderr) {
+        // eslint-disable-next-line prefer-promise-reject-errors
         reject({ code, stderr, stdout });
       } else {
         resolve({ code, stdout });

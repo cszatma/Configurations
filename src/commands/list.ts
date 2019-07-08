@@ -1,23 +1,28 @@
+import { logError } from '@cszatma/process-utils';
+
 import configTypes from '../utils/config-types';
-import { logError } from '../utils/process-utils';
 import { loadOptions } from '../utils/options';
 
-export default function list(config?: string) {
-  if (config) {
-    listAvailableFileTypes(config);
-  } else {
-    listAllCommands();
-  }
+function printList<T>(
+  title: string,
+  array: T[],
+  formatItem?: (element: T) => string,
+): void {
+  console.log(title);
+  array.forEach(element => {
+    const item = formatItem ? formatItem(element) : element;
+    console.log(` - ${item}`);
+  });
 }
 
-function listAllCommands() {
+function listAllCommands(): void {
   printList(
     'Default configurations:',
     Object.values(configTypes),
     config => config.name,
   );
 
-  const customConfigs = loadOptions().customConfigs;
+  const { customConfigs } = loadOptions();
   const keys = Object.keys(customConfigs);
 
   if (keys.length === 0) {
@@ -32,7 +37,7 @@ function listAllCommands() {
   );
 }
 
-function listAvailableFileTypes(configName: string) {
+function listAvailableFileTypes(configName: string): void {
   const config = configTypes[configName];
 
   if (!config) {
@@ -47,14 +52,10 @@ function listAvailableFileTypes(configName: string) {
   );
 }
 
-function printList<T>(
-  title: string,
-  array: T[],
-  formatItem?: (element: T) => string,
-) {
-  console.log(title);
-  array.forEach(element => {
-    const item = formatItem ? formatItem(element) : element;
-    console.log(` - ${item}`);
-  });
+export default function list(config?: string): void {
+  if (config) {
+    listAvailableFileTypes(config);
+  } else {
+    listAllCommands();
+  }
 }

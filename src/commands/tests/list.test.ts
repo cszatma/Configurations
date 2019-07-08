@@ -1,5 +1,3 @@
-import 'jest';
-
 import { runConfigGenCLI } from './test-utils';
 
 describe('Tests for the list command', () => {

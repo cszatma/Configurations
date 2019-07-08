@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
+import { exitFailure, exitSuccess } from '@cszatma/process-utils';
 
 import { configNames } from '../utils/config-types';
 import {
@@ -8,7 +9,6 @@ import {
   resolveConfig,
   saveCustomConfig,
 } from '../utils/options';
-import { exitFailure, exitSuccess } from '../utils/process-utils';
 import choosePackage from '../prompts/choose-package';
 import { parseFileType } from '../utils/parse-functions';
 import readConfigFile from '../utils/read-config-file';
@@ -18,6 +18,21 @@ import { findConfigWithFileName } from '../utils/config-utils';
 export interface SaveOptions {
   name: string;
   force: boolean;
+}
+
+function copyConfigFile(filePath: string, configName: string): void {
+  const destPath = resolveConfig(`${configName}.js`);
+
+  fs.ensureDirSync(configDir);
+
+  // Save it as a js file to make it easily to read and utilize later
+  if (path.extname(filePath) === 'js') {
+    fs.copyFileSync(filePath, destPath);
+  } else {
+    const config = readConfigFile(filePath);
+    const configFile = createJsFile(config);
+    fs.writeFileSync(destPath, configFile, 'utf8');
+  }
 }
 
 const checkExistance = (key: string, object: object): boolean =>
@@ -69,23 +84,10 @@ export default async function save(
     // Save the config info and copy the file
     copyConfigFile(configFile, configName);
     saveCustomConfig(configName, configType);
-    exitSuccess(`Successfully saved ${configName}.`);
+    return exitSuccess(`Successfully saved ${configName}.`);
   } catch (error) {
-    exitFailure(`An error occurred while saving ${configName}:\n` + error);
-  }
-}
-
-function copyConfigFile(filePath: string, configName: string) {
-  const destPath = resolveConfig(`${configName}.js`);
-
-  fs.ensureDirSync(configDir);
-
-  // Save it as a js file to make it easily to read and utilize later
-  if (path.extname(filePath) === 'js') {
-    fs.copyFileSync(filePath, destPath);
-  } else {
-    const config = readConfigFile(filePath);
-    const configFile = createJsFile(config);
-    fs.writeFileSync(destPath, configFile, 'utf8');
+    return exitFailure(
+      `An error occurred while saving ${configName}:\n${error}`,
+    );
   }
 }

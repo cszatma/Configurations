@@ -1,14 +1,13 @@
 import fs from 'fs-extra';
 import path from 'path';
+import { exitFailure, exitSuccess, logError } from '@cszatma/process-utils';
 
 import { parseConfigName, parseFileType } from '../utils/parse-functions';
 import {
-  cwd,
-  exitFailure,
-  exitSuccess,
-  logError,
-} from '../utils/process-utils';
-import { createConfigFile, createJsonFile } from '../utils/util-functions';
+  createConfigFile,
+  createJsonFile,
+  getCwd,
+} from '../utils/util-functions';
 import { resolveConfig } from '../utils/options';
 
 export interface AddOptions {
@@ -21,8 +20,8 @@ export interface AddOptions {
   force: boolean;
 }
 
-export default function add(configName: string, options: AddOptions) {
-  const writeDirectory = options.path || cwd();
+export default function add(configName: string, options: AddOptions): void {
+  const writeDirectory = options.path || getCwd();
 
   // If a custom path was specified make sure it exists
   if (!fs.existsSync(writeDirectory)) {
@@ -59,6 +58,7 @@ export default function add(configName: string, options: AddOptions) {
   const configPath = isCustom
     ? resolveConfig(configName)
     : `../templates/${config.name}`;
+  // eslint-disable-next-line
   const configTemplate = require(configPath);
   const indentAmount = options.indent ? parseInt(options.indent, 10) : 2;
 
@@ -73,9 +73,7 @@ export default function add(configName: string, options: AddOptions) {
     // Check that package.json is supported
     if (!config.supportsPackageJson) {
       exitFailure(
-        `Error: ${
-          config.name
-        } does not support configuration through a package.json.`,
+        `Error: ${config.name} does not support configuration through a package.json.`,
       );
     }
 
@@ -85,9 +83,11 @@ export default function add(configName: string, options: AddOptions) {
       exitFailure('Error: No package.json in the current directory!');
     }
 
+    // eslint-disable-next-line
     const packageJson = require(packageJsonPath);
     // config.fileNmaes.packageJson can't be undefined since we
     // already checked config.supportsPackageJson
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     packageJson[config.fileNames.packageJson!] = configTemplate;
 
     fs.writeFileSync(
@@ -100,6 +100,7 @@ export default function add(configName: string, options: AddOptions) {
   }
 
   const configFileName = config.fileNames[fileType];
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const writePath = path.join(writeDirectory, configFileName!);
 
   // If force option was not enabled, check that the file doesn't already exist
@@ -115,11 +116,12 @@ export default function add(configName: string, options: AddOptions) {
   // Write the file
   try {
     fs.writeFileSync(writePath, fileToWrite, 'utf8');
-    exitSuccess(`Successfully wrote ${config.name} config to ${writePath}.`);
+    return exitSuccess(
+      `Successfully wrote ${config.name} config to ${writePath}.`,
+    );
   } catch (error) {
-    exitFailure(
-      `An error occured will writing ${config.name} config to ${writePath}:\n` +
-        error,
+    return exitFailure(
+      `An error occured will writing ${config.name} config to ${writePath}:\n${error}`,
     );
   }
 }

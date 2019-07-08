@@ -1,12 +1,11 @@
 import { Command } from 'commander';
+import { logError } from '@cszatma/process-utils';
 
 import commands from './commands';
-import { logError } from './utils/process-utils';
 import './utils/type-extensions';
+import packageJson from '../package.json';
 
 type Program = Command & { optionValues: { name?: string } };
-
-const packageJson = require('../package.json');
 
 const programName = packageJson.name;
 
@@ -71,7 +70,9 @@ program
       force: options.force,
     }),
   )
-  .on('option:name', opt => (program.optionValues.name = opt));
+  .on('option:name', opt => {
+    program.optionValues.name = opt;
+  });
 
 program
   .command('delete <config-name>')

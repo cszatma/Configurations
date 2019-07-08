@@ -1,5 +1,7 @@
 import yaml from 'js-yaml';
 import stringifyObject from 'stringify-object';
+import { cwd } from '@cszatma/process-utils';
+
 import { FileType } from './config-types';
 
 export function stripScope(name: string): string {
@@ -31,6 +33,7 @@ export function createConfigFile(
   fileType: FileType,
   indent?: number,
 ): string {
+  // eslint-disable-next-line default-case
   switch (fileType) {
     case 'json':
       return createJsonFile(template, indent);
@@ -41,4 +44,12 @@ export function createConfigFile(
   }
 
   throw new Error(`Invalid file type ${fileType}`);
+}
+
+export function getCwd(): string {
+  if (process.env.NODE_ENV === 'dev') {
+    return cwd();
+  }
+
+  return process.cwd();
 }
