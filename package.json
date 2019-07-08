@@ -28,7 +28,7 @@
     "build/"
   ],
   "engines": {
-    "node": ">=6"
+    "node": ">= 10"
   },
   "dependencies": {
     "chalk": "^2.4.2",
@@ -40,33 +40,37 @@
     "stringify-object": "^3.3.0"
   },
   "devDependencies": {
+    "@cszatma/eslint-config": "^0.1.0",
     "@types/fs-extra": "^5.0.5",
     "@types/inquirer": "^6.0.1",
     "@types/jest": "^24.0.11",
     "@types/js-yaml": "^3.12.1",
     "@types/semver": "^6.0.0",
     "@types/stringify-object": "^3.2.0",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "eslint": "^6.0.1",
+    "eslint-import-resolver-typescript": "^1.1.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "husky": "^2.0.0",
     "jest": "^24.7.1",
     "lint-staged": "^8.1.5",
     "prettier": "^1.17.0",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.1.0",
-    "tslint": "^5.16.0",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^3.4.5"
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
     "clean": "rm -rf build/",
     "config-gen": "NODE_ENV=dev node build/index.js",
-    "format": "prettier --write \"./**/*.{ts,js,json}\"",
-    "lint": "tslint -p ./tsconfig.json --fix",
-    "prepare": "yarn run clean && yarn run build",
-    "test": "jest",
-    "test-watch": "jest --watch",
+    "lint": "eslint --ext=js,ts ./src",
+    "lint:fix": "eslint --fix --ext=js,ts ./src",
+    "prepublishOnly": "yarn clean && yarn build && yarn verify",
+    "test": "NODE_ENV=test jest --coverage",
+    "test:watch": "NODE_ENV=test jest --watch",
     "ts-config-gen": "NODE_ENV=dev ts-node src/index.ts",
+    "verify": "yarn lint && yarn test",
     "watch": "tsc -p ./tsconfig.build.json -w"
   },
   "prettier": {
@@ -74,16 +78,13 @@
     "singleQuote": true
   },
   "lint-staged": {
-    "*.ts": [
-      "tslint -p ./tsconfig.json --fix",
+    "*.{js,ts}": [
+      "eslint --fix --ext=js,ts",
       "git add"
     ],
-    "*.{js,json}": [
+    "*.json": [
       "prettier --write",
       "git add"
-    ],
-    "yarn.lock": [
-      "git rm --cached"
     ]
   },
   "husky": {
