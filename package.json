@@ -1,0 +1,96 @@
+{
+  "name": "config-gen",
+  "version": "2.0.0-alpha.0",
+  "description": "CLI to generate js/json configuration files for various packages",
+  "keywords": [
+    "config gen",
+    "config create",
+    "create configs",
+    "configs",
+    "configurations",
+    "config creator"
+  ],
+  "author": {
+    "name": "Christopher Szatmary",
+    "email": "cs@christopherszatmary.com",
+    "url": "https://christopherszatmary.com"
+  },
+  "repository": "cszatma/config-gen",
+  "bugs": {
+    "url": "https://github.com/cszatma/config-gen/issues"
+  },
+  "license": "MIT",
+  "main": "build/index.js",
+  "bin": {
+    "config-gen": "build/index.js"
+  },
+  "files": [
+    "build/"
+  ],
+  "engines": {
+    "node": ">= 8"
+  },
+  "dependencies": {
+    "@cszatma/process-utils": "^0.1.1",
+    "chalk": "^2.4.2",
+    "commander": "^2.20.0",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^6.3.1",
+    "js-yaml": "^3.13.1",
+    "semver": "^6.0.0",
+    "stringify-object": "^3.3.0"
+  },
+  "devDependencies": {
+    "@cszatma/eslint-config": "^0.1.0",
+    "@types/fs-extra": "^8.0.0",
+    "@types/inquirer": "^6.0.1",
+    "@types/jest": "^24.0.11",
+    "@types/js-yaml": "^3.12.1",
+    "@types/semver": "^6.0.0",
+    "@types/stringify-object": "^3.2.0",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "eslint": "^6.0.1",
+    "eslint-import-resolver-typescript": "^1.1.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.0",
+    "jest": "^24.7.1",
+    "lint-staged": "^9.1.0",
+    "prettier": "^1.17.0",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.5"
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.build.json",
+    "clean": "rm -rf build/",
+    "config-gen": "NODE_ENV=dev node build/index.js",
+    "lint": "eslint --ext=js,ts ./src",
+    "lint:fix": "eslint --fix --ext=js,ts ./src",
+    "prepublishOnly": "yarn clean && yarn build && yarn verify",
+    "test": "NODE_ENV=test jest --coverage",
+    "test:watch": "NODE_ENV=test jest --watch",
+    "ts-config-gen": "NODE_ENV=dev ts-node src/index.ts",
+    "verify": "yarn lint && yarn test",
+    "watch": "tsc -p ./tsconfig.build.json -w"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "singleQuote": true
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix --ext=js,ts",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
