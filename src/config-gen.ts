@@ -3,9 +3,10 @@ import { logError } from '@cszatma/process-utils';
 
 import commands from './commands';
 import './utils/type-extensions';
-import packageJson from '../package.json';
 
 type Program = Command & { optionValues: { name?: string } };
+
+const packageJson = require('../package.json');
 
 const programName = packageJson.name;
 
