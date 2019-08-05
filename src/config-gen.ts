@@ -2,7 +2,6 @@ import { Command } from 'commander';
 import { logError } from '@cszatma/process-utils';
 
 import commands from './commands';
-import './utils/type-extensions';
 
 type Program = Command & { optionValues: { name?: string } };
 
