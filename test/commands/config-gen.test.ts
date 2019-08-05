@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 
 import { runConfigGenCLI } from './test-utils';
-import rootPackageJson from '../../../package.json';
+import rootPackageJson from '../../package.json';
 
 describe('Test general config-gen options', () => {
   it('should print the version number', async () => {

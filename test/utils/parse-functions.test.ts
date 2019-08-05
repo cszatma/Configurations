@@ -1,5 +1,8 @@
-import configTypes from '../config-types';
-import { parseConfigName, parseFileType } from '../parse-functions';
+import configTypes from '../../src/utils/config-types';
+import {
+  parseConfigName,
+  parseFileType,
+} from '../../src/utils/parse-functions';
 
 describe('Test parse functions', () => {
   it('should return the prettier config object', () => {

@@ -1,5 +1,5 @@
-import configTypes from '../config-types';
-import '../type-extensions';
+import configTypes from '../../src/utils/config-types';
+import '../../src/utils/type-extensions';
 
 describe('Test standard type extensions', () => {
   const values = [

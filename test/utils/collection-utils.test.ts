@@ -1,4 +1,4 @@
-import { lastElement } from '../collection-utils';
+import { lastElement } from '../../src/utils/collection-utils';
 
 it('should return the last element which is 4', () => {
   expect(lastElement([1, 2, 3, 4])).toBe(4);
