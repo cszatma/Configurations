@@ -56,4 +56,8 @@ fs.writeFileSync = (p: string, contents: string) => {
   mockFiles[dir][file] = contents;
 };
 
+fs.readJsonSync = (p: string): string => {
+  return JSON.parse(fs.readFileSync(p));
+};
+
 export default fs;

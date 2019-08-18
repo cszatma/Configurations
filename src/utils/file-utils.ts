@@ -25,7 +25,7 @@ export function createJsFile(object: any, indent: number = 2): string {
 export function createConfigFile(
   template: any,
   fileType: FileType,
-  indent?: number,
+  indent: number = 2,
 ): string {
   switch (fileType) {
     case 'json':
