@@ -1,13 +1,14 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { exitFailure, exitSuccess, logError } from '@cszatma/process-utils';
+import {
+  exitFailure,
+  exitSuccess,
+  logError,
+  cwd,
+} from '@cszatma/process-utils';
 
 import { parseConfigName, parseFileType } from '../utils/parse-functions';
-import {
-  createConfigFile,
-  createJsonFile,
-  getCwd,
-} from '../utils/util-functions';
+import { createConfigFile, createJsonFile } from '../utils/file-utils';
 import { resolveConfig } from '../utils/options';
 
 export interface AddOptions {
@@ -20,8 +21,10 @@ export interface AddOptions {
   force: boolean;
 }
 
+const getWd = () => (process.env.NODE_ENV === 'dev' ? cwd() : process.cwd());
+
 export default function add(configName: string, options: AddOptions): void {
-  const writeDirectory = options.path || getCwd();
+  const writeDirectory = options.path || getWd();
 
   // If a custom path was specified make sure it exists
   if (!fs.existsSync(writeDirectory)) {

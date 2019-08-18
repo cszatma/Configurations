@@ -1,16 +1,18 @@
+import path from 'path';
+import fs from 'fs-extra';
 import yaml from 'js-yaml';
 import stringifyObject from 'stringify-object';
-import { cwd } from '@cszatma/process-utils';
 
 import { FileType } from './config-types';
 
-export function stripScope(name: string): string {
-  if (name.charAt(0) === '@') {
-    const index = name.indexOf('/');
-    return name.slice(index + 1);
+export function readConfigFile(filePath: string): any {
+  const fileExt = path.extname(filePath);
+
+  if (fileExt === '.yaml' || fileExt === '.yml') {
+    return yaml.safeLoad(fs.readFileSync(filePath, 'utf-8'));
   }
 
-  return name;
+  return fs.readJsonSync(filePath);
 }
 
 export function createJsonFile(object: any, indent: number = 2): string {
@@ -33,7 +35,6 @@ export function createConfigFile(
   fileType: FileType,
   indent?: number,
 ): string {
-  // eslint-disable-next-line default-case
   switch (fileType) {
     case 'json':
       return createJsonFile(template, indent);
@@ -41,15 +42,7 @@ export function createConfigFile(
       return createJsFile(template, indent);
     case 'yaml':
       return createYamlFile(template, indent);
+    default:
+      throw new Error(`Invalid file type ${fileType}`);
   }
-
-  throw new Error(`Invalid file type ${fileType}`);
-}
-
-export function getCwd(): string {
-  if (process.env.NODE_ENV === 'dev') {
-    return cwd();
-  }
-
-  return process.cwd();
 }

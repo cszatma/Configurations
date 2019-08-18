@@ -11,8 +11,7 @@ import {
 } from '../utils/options';
 import choosePackage from '../prompts/choose-package';
 import { parseFileType } from '../utils/parse-functions';
-import readConfigFile from '../utils/read-config-file';
-import { createJsFile } from '../utils/util-functions';
+import { readConfigFile, createJsFile } from '../utils/file-utils';
 import { findConfigWithFileName } from '../utils/config-utils';
 
 export interface SaveOptions {
