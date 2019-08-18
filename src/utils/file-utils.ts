@@ -15,19 +15,11 @@ export function readConfigFile(filePath: string): any {
   return fs.readJsonSync(filePath);
 }
 
-export function createJsonFile(object: any, indent: number = 2): string {
-  return JSON.stringify(object, null, indent);
-}
-
 export function createJsFile(object: any, indent: number = 2): string {
   const stringifiedObject = stringifyObject(object, {
     indent: ' '.repeat(indent),
   });
   return `module.exports = ${stringifiedObject};`;
-}
-
-export function createYamlFile(object: any, indent: number = 2): string {
-  return yaml.dump(object, { indent });
 }
 
 export function createConfigFile(
@@ -37,11 +29,11 @@ export function createConfigFile(
 ): string {
   switch (fileType) {
     case 'json':
-      return createJsonFile(template, indent);
+      return JSON.stringify(template, null, indent);
     case 'js':
       return createJsFile(template, indent);
     case 'yaml':
-      return createYamlFile(template, indent);
+      return yaml.dump(template, { indent });
     default:
       throw new Error(`Invalid file type ${fileType}`);
   }

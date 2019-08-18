@@ -8,7 +8,7 @@ import {
 } from '@cszatma/process-utils';
 
 import { parseConfigName, parseFileType } from '../utils/parse-functions';
-import { createConfigFile, createJsonFile } from '../utils/file-utils';
+import { createConfigFile } from '../utils/file-utils';
 import { resolveConfig } from '../utils/options';
 
 export interface AddOptions {
@@ -95,7 +95,7 @@ export default function add(configName: string, options: AddOptions): void {
 
     fs.writeFileSync(
       packageJsonPath,
-      createJsonFile(packageJson, indentAmount),
+      JSON.stringify(packageJson, null, indentAmount),
       'utf8',
     );
 
