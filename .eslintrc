@@ -1,3 +1,6 @@
 {
-    "extends": ["@cszatma"]
+  "extends": ["@cszatma"],
+  "rules": {
+    "no-restricted-syntax": ["off"]
+  }
 }

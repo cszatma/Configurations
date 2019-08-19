@@ -36,11 +36,11 @@ export function loadOptions(force?: boolean): Options {
         `Error loading saved preferences. ~/.configgenrc might be corrupted or have synatx errors. Please fix/delete it then rerun config-gen.\n(${error.message}`,
       );
     }
-
-    return cachedOptions;
+  } else {
+    cachedOptions = emptyOptions();
   }
 
-  return emptyOptions();
+  return cachedOptions;
 }
 
 export function saveOptions(options: Options = cachedOptions): void {

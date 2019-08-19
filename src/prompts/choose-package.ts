@@ -1,4 +1,4 @@
-import inquirer, { Question } from 'inquirer';
+import { prompt, ListQuestion } from 'inquirer';
 
 import { configNames, ConfigType } from '../utils/config-types';
 import { Optional } from '../types/aliases';
@@ -8,7 +8,7 @@ interface Answer {
   packageName: string;
 }
 
-const packageQuestion = (packageNames: string[]): Question<Answer> => ({
+const packageQuestion = (packageNames: string[]): ListQuestion<Answer> => ({
   name: 'packageName',
   type: 'list',
   message: 'Which package is this configuration for?',
@@ -25,9 +25,7 @@ const packageQuestion = (packageNames: string[]): Question<Answer> => ({
 });
 
 export default async function choosePackage(): Promise<Optional<ConfigType>> {
-  const { packageName } = await inquirer.prompt<Answer>(
-    packageQuestion(configNames),
-  );
+  const { packageName } = await prompt<Answer>(packageQuestion(configNames));
 
   // Handle custom case
   if (packageName === '__other__') {

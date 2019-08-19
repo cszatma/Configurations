@@ -30,10 +30,11 @@ export interface Configs {
 const babel: ConfigType = {
   defaultType: 'json',
   fileNames: {
+    js: '.babelrc.js',
     json: '.babelrc',
     packageJson: 'babel',
   },
-  fileTypes: ['json'],
+  fileTypes: ['js', 'json'],
   name: 'babel',
   supportsPackageJson: true,
 };

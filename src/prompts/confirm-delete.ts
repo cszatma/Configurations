@@ -1,10 +1,12 @@
-import inquirer, { Question } from 'inquirer';
+import { prompt, ConfirmQuestion } from 'inquirer';
 
 interface Answer {
   shouldDelete: boolean;
 }
 
-const confirmDeleteQuestion = (configName: string): Question<Answer> => ({
+const confirmDeleteQuestion = (
+  configName: string,
+): ConfirmQuestion<Answer> => ({
   name: 'shouldDelete',
   type: 'confirm',
   message: `Are you sure you want to permanently delete ${configName}?`,
@@ -14,7 +16,7 @@ const confirmDeleteQuestion = (configName: string): Question<Answer> => ({
 export default async function confirmDelete(
   configName: string,
 ): Promise<boolean> {
-  const { shouldDelete } = await inquirer.prompt<Answer>(
+  const { shouldDelete } = await prompt<Answer>(
     confirmDeleteQuestion(configName),
   );
 

@@ -6,7 +6,7 @@ export interface CLIStatus {
   stderr?: string;
 }
 
-export const CONFIG_GEN_PATH = require.resolve('../../config-gen');
+export const CONFIG_GEN_PATH = require.resolve('../../src/config-gen');
 export const TS_NODE = require.resolve('ts-node/dist/bin');
 
 export function runConfigGenCLI(args: string): Promise<CLIStatus> {
