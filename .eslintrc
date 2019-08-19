@@ -1,7 +1,6 @@
 {
   "extends": ["@cszatma"],
   "rules": {
-    "function-paren-newline": ["off"],
     "no-restricted-syntax": ["off"]
   }
 }

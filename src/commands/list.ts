@@ -1,6 +1,6 @@
 import { logError } from '@cszatma/process-utils';
 
-import configTypes, { ConfigType } from '../utils/config-types';
+import configTypes from '../utils/config-types';
 import { loadOptions } from '../utils/options';
 import { findConfigWithName } from '../utils/config-utils';
 

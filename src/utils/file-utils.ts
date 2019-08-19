@@ -15,7 +15,7 @@ export function readConfigFile(filePath: string): any {
   return fs.readJsonSync(filePath);
 }
 
-export function createJsFile(object: any, indent: number = 2): string {
+export function createJsFile(object: any, indent = 2): string {
   const stringifiedObject = stringifyObject(object, {
     indent: ' '.repeat(indent),
   });
@@ -25,7 +25,7 @@ export function createJsFile(object: any, indent: number = 2): string {
 export function createConfigFile(
   template: any,
   fileType: FileType,
-  indent: number = 2,
+  indent = 2,
 ): string {
   switch (fileType) {
     case 'json':
