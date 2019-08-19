@@ -70,6 +70,7 @@
     "prepublishOnly": "yarn clean && yarn build && yarn verify",
     "test": "NODE_ENV=test jest --coverage",
     "test:watch": "NODE_ENV=test jest --watch",
+    "test:ci": "NODE_ENV=test jest --coverage --runInBand --colors",
     "ts-config-gen": "NODE_ENV=dev ts-node src/index.ts",
     "verify": "yarn lint && yarn test",
     "watch": "tsc -p ./tsconfig.build.json -w"
