@@ -63,7 +63,7 @@
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
-    "clean": "rm -rf build/",
+    "clean": "rm -rf build && rm -rf coverage",
     "config-gen": "NODE_ENV=dev node build/index.js",
     "lint": "eslint --ext=js,ts ./src",
     "lint:fix": "eslint --fix --ext=js,ts ./src",
