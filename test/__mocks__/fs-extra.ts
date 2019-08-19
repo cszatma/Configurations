@@ -60,4 +60,15 @@ fs.readJsonSync = (p: string): string => {
   return JSON.parse(fs.readFileSync(p));
 };
 
+fs.removeSync = (p: string) => {
+  const dir = path.dirname(p);
+  const file = path.basename(p);
+
+  if (!mockFiles[dir] || !mockFiles[dir][file]) {
+    throw new Error('File does not exist');
+  }
+
+  delete mockFiles[dir][file];
+};
+
 export default fs;

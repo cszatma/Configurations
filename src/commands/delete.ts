@@ -20,6 +20,7 @@ export default async function(
 
   if (!(configName in customConfigs)) {
     exitFailure(`Error: Config named ${configName} does not exist!`);
+    return;
   }
 
   const shouldDelete = options.force || (await confirmDelete(configName));

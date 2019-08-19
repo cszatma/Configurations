@@ -1,7 +1,8 @@
 import { logError } from '@cszatma/process-utils';
 
-import configTypes from '../utils/config-types';
+import configTypes, { ConfigType } from '../utils/config-types';
 import { loadOptions } from '../utils/options';
+import { findConfigWithName } from '../utils/config-utils';
 
 function printList<T>(
   title: string,
@@ -38,12 +39,13 @@ function listAllCommands(): void {
 }
 
 function listAvailableFileTypes(configName: string): void {
-  const config = configTypes[configName];
+  const config = findConfigWithName(configName);
 
   if (!config) {
     logError(`Error: ${configName} is not a valid config type!`);
     console.log('Use `config-gen list` to list all available config types.');
     process.exit(1);
+    return;
   }
 
   printList(`Available file types for ${configName}:`, config.fileTypes);
