@@ -1,18 +1,18 @@
-import path from 'path';
-import fs from 'fs-extra';
-import { exitFailure, exitSuccess } from '@cszatma/process-utils';
+import path from "path";
+import fs from "fs-extra";
+import { exitFailure, exitSuccess } from "@cszatma/process-utils";
 
-import { configNames } from '../utils/config-types';
+import { configNames } from "../utils/config-types";
 import {
   configDir,
   loadOptions,
   resolveConfig,
   saveCustomConfig,
-} from '../utils/options';
-import choosePackage from '../prompts/choose-package';
-import { parseFileType } from '../utils/parse-functions';
-import { readConfigFile, createJsFile } from '../utils/file-utils';
-import { findConfigWithFileName } from '../utils/config-utils';
+} from "../utils/options";
+import choosePackage from "../prompts/choose-package";
+import { parseFileType } from "../utils/parse-functions";
+import { readConfigFile, createJsFile } from "../utils/file-utils";
+import { findConfigWithFileName } from "../utils/config-utils";
 
 export interface SaveOptions {
   name: string;
@@ -25,12 +25,12 @@ function copyConfigFile(filePath: string, configName: string): void {
   fs.ensureDirSync(configDir);
 
   // Save it as a js file to make it easily to read and utilize later
-  if (path.extname(filePath) === 'js') {
+  if (path.extname(filePath) === "js") {
     fs.copyFileSync(filePath, destPath);
   } else {
     const config = readConfigFile(filePath);
     const configFile = createJsFile(config);
-    fs.writeFileSync(destPath, configFile, 'utf8');
+    fs.writeFileSync(destPath, configFile, "utf8");
   }
 }
 
@@ -68,7 +68,7 @@ export default async function save(
 
   // Check if __other__
   if (!configType) {
-    return exitFailure('Custom package configs are currently not supported.');
+    return exitFailure("Custom package configs are currently not supported.");
   }
 
   const fileType = parseFileType(pathInfo.ext, configType);

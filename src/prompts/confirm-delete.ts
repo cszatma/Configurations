@@ -1,4 +1,4 @@
-import { prompt, ConfirmQuestion } from 'inquirer';
+import { prompt, ConfirmQuestion } from "inquirer";
 
 interface Answer {
   shouldDelete: boolean;
@@ -7,8 +7,8 @@ interface Answer {
 const confirmDeleteQuestion = (
   configName: string,
 ): ConfirmQuestion<Answer> => ({
-  name: 'shouldDelete',
-  type: 'confirm',
+  name: "shouldDelete",
+  type: "confirm",
   message: `Are you sure you want to permanently delete ${configName}?`,
   default: false,
 });

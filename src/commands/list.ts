@@ -1,8 +1,8 @@
-import { logError } from '@cszatma/process-utils';
+import { logError } from "@cszatma/process-utils";
 
-import configTypes from '../utils/config-types';
-import { loadOptions } from '../utils/options';
-import { findConfigWithName } from '../utils/config-utils';
+import configTypes from "../utils/config-types";
+import { loadOptions } from "../utils/options";
+import { findConfigWithName } from "../utils/config-utils";
 
 function printList<T>(
   title: string,
@@ -10,7 +10,7 @@ function printList<T>(
   formatItem?: (element: T) => string,
 ): void {
   console.log(title);
-  array.forEach(element => {
+  array.forEach((element) => {
     const item = formatItem ? formatItem(element) : element;
     console.log(` - ${item}`);
   });
@@ -18,9 +18,9 @@ function printList<T>(
 
 function listAllCommands(): void {
   printList(
-    'Default configurations:',
+    "Default configurations:",
     Object.values(configTypes),
-    config => config.name,
+    (config) => config.name,
   );
 
   const { customConfigs } = loadOptions();
@@ -32,9 +32,9 @@ function listAllCommands(): void {
 
   // Print custom configs
   printList(
-    'Custom configurations:',
+    "Custom configurations:",
     keys,
-    key => `${key} (${customConfigs[key]})`,
+    (key) => `${key} (${customConfigs[key]})`,
   );
 }
 
@@ -43,14 +43,14 @@ function listAvailableFileTypes(configName: string): void {
 
   if (!config) {
     logError(`Error: ${configName} is not a valid config type!`);
-    console.log('Use `config-gen list` to list all available config types.');
+    console.log("Use `config-gen list` to list all available config types.");
     process.exit(1);
     return;
   }
 
   printList(`Available file types for ${configName}:`, config.fileTypes);
   console.log(
-    `Supports package.json: ${config.supportsPackageJson ? 'yes' : 'no'}`,
+    `Supports package.json: ${config.supportsPackageJson ? "yes" : "no"}`,
   );
 }
 

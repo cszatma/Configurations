@@ -1,17 +1,17 @@
 module.exports = {
   compilerOptions: {
-    module: 'commonjs',
+    module: "commonjs",
     esModuleInterop: true,
-    target: 'es5',
+    target: "es5",
     noImplicitAny: true,
-    moduleResolution: 'node',
+    moduleResolution: "node",
     sourceMap: false,
-    rootDir: 'src',
-    outDir: 'build',
-    baseUrl: '.',
+    rootDir: "src",
+    outDir: "build",
+    baseUrl: ".",
     paths: {
-      '*': ['node_modules/*', 'src/types/*'],
+      "*": ["node_modules/*", "src/types/*"],
     },
   },
-  include: ['src/**/*'],
+  include: ["src/**/*"],
 };

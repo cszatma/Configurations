@@ -1,15 +1,15 @@
-import fs from 'fs-extra';
-import path from 'path';
+import fs from "fs-extra";
+import path from "path";
 import {
   exitFailure,
   exitSuccess,
   logError,
   cwd,
-} from '@cszatma/process-utils';
+} from "@cszatma/process-utils";
 
-import { parseConfigName, parseFileType } from '../utils/parse-functions';
-import { createConfigFile } from '../utils/file-utils';
-import { resolveConfig } from '../utils/options';
+import { parseConfigName, parseFileType } from "../utils/parse-functions";
+import { createConfigFile } from "../utils/file-utils";
+import { resolveConfig } from "../utils/options";
 
 export interface AddOptions {
   path: string;
@@ -21,7 +21,7 @@ export interface AddOptions {
   force: boolean;
 }
 
-const getWd = () => (process.env.NODE_ENV === 'dev' ? cwd() : process.cwd());
+const getWd = () => (process.env.NODE_ENV === "dev" ? cwd() : process.cwd());
 
 export default function add(configName: string, options: AddOptions): void {
   const writeDirectory = options.path || getWd();
@@ -42,7 +42,7 @@ export default function add(configName: string, options: AddOptions): void {
   // If config is null then configName was not a valid config
   if (!config) {
     logError(`Error: ${configName} is not a valid config!`);
-    console.log('Use `config-gen list` to list all available config types.');
+    console.log("Use `config-gen list` to list all available config types.");
     return process.exit(1);
   }
 
@@ -67,7 +67,7 @@ export default function add(configName: string, options: AddOptions): void {
 
   if (!indentAmount) {
     exitFailure(
-      'Error: A valid integer must be specified for the indent option.',
+      "Error: A valid integer must be specified for the indent option.",
     );
   }
 
@@ -81,9 +81,9 @@ export default function add(configName: string, options: AddOptions): void {
     }
 
     // Check that a package.json exists and import it
-    const packageJsonPath = path.join(writeDirectory, 'package.json');
+    const packageJsonPath = path.join(writeDirectory, "package.json");
     if (!fs.existsSync(packageJsonPath)) {
-      exitFailure('Error: No package.json in the current directory!');
+      exitFailure("Error: No package.json in the current directory!");
     }
 
     // eslint-disable-next-line
@@ -96,7 +96,7 @@ export default function add(configName: string, options: AddOptions): void {
     fs.writeFileSync(
       packageJsonPath,
       JSON.stringify(packageJson, null, indentAmount),
-      'utf8',
+      "utf8",
     );
 
     exitSuccess(`Successfully wrote ${config.name} config to package.json.`);
@@ -118,7 +118,7 @@ export default function add(configName: string, options: AddOptions): void {
 
   // Write the file
   try {
-    fs.writeFileSync(writePath, fileToWrite, 'utf8');
+    fs.writeFileSync(writePath, fileToWrite, "utf8");
     return exitSuccess(
       `Successfully wrote ${config.name} config to ${writePath}.`,
     );

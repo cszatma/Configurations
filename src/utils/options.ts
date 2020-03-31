@@ -1,9 +1,9 @@
-import path from 'path';
-import os from 'os';
-import fs from 'fs-extra';
-import { exitFailure } from '@cszatma/process-utils';
+import path from "path";
+import os from "os";
+import fs from "fs-extra";
+import { exitFailure } from "@cszatma/process-utils";
 
-import { ConfigType } from './config-types';
+import { ConfigType } from "./config-types";
 
 export interface Options {
   customConfigs: {
@@ -15,8 +15,8 @@ const emptyOptions = (): Options => ({
   customConfigs: {},
 });
 
-export const configDir = path.join(os.homedir(), '.config-gen');
-export const rcPath = path.join(os.homedir(), '.configgenrc');
+export const configDir = path.join(os.homedir(), ".config-gen");
+export const rcPath = path.join(os.homedir(), ".configgenrc");
 export const resolveConfig = (configName: string): string =>
   path.join(configDir, configName);
 
@@ -30,7 +30,7 @@ export function loadOptions(force?: boolean): Options {
   if (fs.existsSync(rcPath)) {
     // Reac rc file
     try {
-      cachedOptions = JSON.parse(fs.readFileSync(rcPath, 'utf-8'));
+      cachedOptions = JSON.parse(fs.readFileSync(rcPath, "utf-8"));
     } catch (error) {
       exitFailure(
         `Error loading saved preferences. ~/.configgenrc might be corrupted or have synatx errors. Please fix/delete it then rerun config-gen.\n(${error.message}`,

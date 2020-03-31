@@ -1,7 +1,7 @@
-import { Optional } from '../types/aliases';
-import { ConfigType, FILE_ALIASES, FileType } from './config-types';
-import { loadOptions } from './options';
-import { findConfigWithName } from './config-utils';
+import { Optional } from "../types/aliases";
+import { ConfigType, FILE_ALIASES, FileType } from "./config-types";
+import { loadOptions } from "./options";
+import { findConfigWithName } from "./config-utils";
 
 export interface ParseResult {
   config?: ConfigType;
@@ -21,7 +21,7 @@ export function parseFileType(
   config: ConfigType,
 ): Optional<FileType> {
   const trimmed = type.trim();
-  const normalizedType = (trimmed.charAt(0) === '.'
+  const normalizedType = (trimmed.charAt(0) === "."
     ? trimmed.slice(1)
     : trimmed
   ).toLowerCase() as FileType;

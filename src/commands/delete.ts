@@ -1,18 +1,18 @@
-import fs from 'fs-extra';
-import { exitFailure, exitSuccess } from '@cszatma/process-utils';
+import fs from "fs-extra";
+import { exitFailure, exitSuccess } from "@cszatma/process-utils";
 
 import {
   deleteCustomConfig,
   loadOptions,
   resolveConfig,
-} from '../utils/options';
-import confirmDelete from '../prompts/confirm-delete';
+} from "../utils/options";
+import confirmDelete from "../prompts/confirm-delete";
 
 interface DeleteOptions {
   force: boolean;
 }
 
-export default async function(
+export default async function (
   configName: string,
   options: DeleteOptions,
 ): Promise<void> {

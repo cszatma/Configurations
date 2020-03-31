@@ -1,15 +1,15 @@
-import path from 'path';
-import fs from 'fs-extra';
-import yaml from 'js-yaml';
-import stringifyObject from 'stringify-object';
+import path from "path";
+import fs from "fs-extra";
+import yaml from "js-yaml";
+import stringifyObject from "stringify-object";
 
-import { FileType } from './config-types';
+import { FileType } from "./config-types";
 
 export function readConfigFile(filePath: string): any {
   const fileExt = path.extname(filePath);
 
-  if (fileExt === '.yaml' || fileExt === '.yml') {
-    return yaml.safeLoad(fs.readFileSync(filePath, 'utf-8'));
+  if (fileExt === ".yaml" || fileExt === ".yml") {
+    return yaml.safeLoad(fs.readFileSync(filePath, "utf-8"));
   }
 
   return fs.readJsonSync(filePath);
@@ -17,7 +17,7 @@ export function readConfigFile(filePath: string): any {
 
 export function createJsFile(object: any, indent = 2): string {
   const stringifiedObject = stringifyObject(object, {
-    indent: ' '.repeat(indent),
+    indent: " ".repeat(indent),
   });
   return `module.exports = ${stringifiedObject};`;
 }
@@ -28,11 +28,11 @@ export function createConfigFile(
   indent = 2,
 ): string {
   switch (fileType) {
-    case 'json':
+    case "json":
       return JSON.stringify(template, null, indent);
-    case 'js':
+    case "js":
       return createJsFile(template, indent);
-    case 'yaml':
+    case "yaml":
       return yaml.dump(template, { indent });
     default:
       throw new Error(`Invalid file type ${fileType}`);
