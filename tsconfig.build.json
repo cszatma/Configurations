@@ -1,4 +1,10 @@
 {
   "extends": "./tsconfig",
-  "exclude": ["src/types/**", "test"]
+  "compilerOptions": {
+    "outDir": "build",
+    "allowJs": false,
+    "declaration": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
